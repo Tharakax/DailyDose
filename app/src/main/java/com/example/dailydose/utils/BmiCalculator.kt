@@ -55,3 +55,4 @@ enum class BMICategory(val displayName: String) {
     OVERWEIGHT("Overweight"),
     OBESE("Obese")
 }
+

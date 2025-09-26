@@ -73,3 +73,4 @@ class HealthEntryAdapter(
                 today.get(Calendar.DAY_OF_YEAR) == entryDate.get(Calendar.DAY_OF_YEAR)
     }
 }
+

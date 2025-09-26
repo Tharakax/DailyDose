@@ -11,7 +11,54 @@
         <item name="colorSurface">@color/surface_color</item>
         <item name="colorOnSurface">@color/text_primary</item>
         <item name="colorOnBackground">@color/text_primary</item>
+        <item name="android:statusBarColor">@color/primary_dark</item>
+        <item name="android:windowLightStatusBar">false</item>
     </style>
 
     <style name="Theme.DailyDose" parent="Base.Theme.DailyDose" />
+    
+    <!-- Modern Card Style -->
+    <style name="ModernCard" parent="Widget.MaterialComponents.CardView">
+        <item name="cardCornerRadius">16dp</item>
+        <item name="cardElevation">6dp</item>
+        <item name="cardBackgroundColor">@color/card_background</item>
+    </style>
+    
+    <!-- Modern Button Style -->
+    <style name="ModernButton" parent="Widget.MaterialComponents.Button">
+        <item name="android:background">@drawable/modern_button</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textSize">16sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:padding">16dp</item>
+    </style>
+    
+    <!-- Modern Floating Action Button -->
+    <style name="ModernFAB" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/accent_color</item>
+        <item name="tint">@color/white</item>
+        <item name="elevation">8dp</item>
+        <item name="pressedTranslationZ">12dp</item>
+    </style>
+    
+    <!-- Page-specific themes -->
+    <style name="DashboardTheme">
+        <item name="android:background">@color/dashboard_background</item>
+    </style>
+    
+    <style name="AddEntryTheme">
+        <item name="android:background">@color/add_entry_background</item>
+    </style>
+    
+    <style name="HistoryTheme">
+        <item name="android:background">@color/history_background</item>
+    </style>
+    
+    <style name="TodoTheme">
+        <item name="android:background">@color/todo_background</item>
+    </style>
+    
+    <style name="SettingsTheme">
+        <item name="android:background">@color/settings_background</item>
+    </style>
 </resources>

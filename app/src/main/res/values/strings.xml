@@ -87,6 +87,12 @@
     <string name="todo_category">Category</string>
     <string name="todo_priority">Priority</string>
     <string name="todo_due_date">Due Date (Optional)</string>
+    <string name="low">Low</string>
+    <string name="medium">Medium</string>
+    <string name="high">High</string>
+    <string name="urgent">Urgent</string>
+    <string name="select_date">Select Date</string>
+    <string name="select_time">Select Time</string>
     
     <!-- BMI -->
     <string name="bmi_calculator">BMI Calculator</string>

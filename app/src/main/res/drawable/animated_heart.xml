@@ -7,3 +7,4 @@
     <item android:drawable="@drawable/heart_frame2" android:duration="200" />
     <item android:drawable="@drawable/heart_frame1" android:duration="200" />
 </animation-list>
+

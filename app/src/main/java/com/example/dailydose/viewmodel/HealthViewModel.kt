@@ -6,53 +6,84 @@ import androidx.lifecycle.ViewModel
 import com.example.dailydose.data.HealthRepository
 import com.example.dailydose.model.HealthEntry
 import com.example.dailydose.model.HealthGoal
+import com.example.dailydose.model.HealthType
+import java.util.*
 
 class HealthViewModel : ViewModel() {
-    
+
     private lateinit var repository: HealthRepository
-    
+
     private val _healthEntries = MutableLiveData<List<HealthEntry>>()
     val healthEntries: LiveData<List<HealthEntry>> = _healthEntries
-    
+
     private val _healthGoals = MutableLiveData<List<HealthGoal>>()
     val healthGoals: LiveData<List<HealthGoal>> = _healthGoals
-    
+
     private val _todayEntries = MutableLiveData<List<HealthEntry>>()
     val todayEntries: LiveData<List<HealthEntry>> = _todayEntries
-    
+
     fun setRepository(repository: HealthRepository) {
         this.repository = repository
-        loadAllData()
     }
-    
-    fun loadAllData() {
+
+    fun getAllHealthEntries() {
         _healthEntries.value = repository.getAllHealthEntries()
-        _healthGoals.value = repository.getAllHealthGoals()
+    }
+
+    fun getHealthEntriesByType(type: HealthType) {
+        _healthEntries.value = repository.getHealthEntriesByType(type)
+    }
+
+    fun getTodayEntries() {
         _todayEntries.value = repository.getTodayEntries()
     }
-    
+
+    fun getRecentEntries() {
+        _healthEntries.value = repository.getRecentEntries()
+    }
+
+    fun getWeeklyEntries() {
+        _healthEntries.value = repository.getWeeklyEntries()
+    }
+
+    fun getAllHealthGoals() {
+        _healthGoals.value = repository.getAllHealthGoals()
+    }
+
+    fun getActiveGoals() {
+        _healthGoals.value = repository.getActiveGoals()
+    }
+
     fun saveHealthEntry(entry: HealthEntry) {
         repository.saveHealthEntry(entry)
-        loadAllData()
+        getAllHealthEntries()
+        getTodayEntries()
     }
-    
+
+    fun updateHealthEntry(entry: HealthEntry) {
+        repository.updateHealthEntry(entry)
+        getAllHealthEntries()
+        getTodayEntries()
+    }
+
     fun deleteHealthEntry(entryId: String) {
         repository.deleteHealthEntry(entryId)
-        loadAllData()
+        getAllHealthEntries()
+        getTodayEntries()
     }
-    
+
     fun saveHealthGoal(goal: HealthGoal) {
         repository.saveHealthGoal(goal)
-        loadAllData()
+        getAllHealthGoals()
     }
-    
+
+    fun updateHealthGoal(goal: HealthGoal) {
+        repository.updateHealthGoal(goal)
+        getAllHealthGoals()
+    }
+
     fun deleteHealthGoal(goalId: String) {
         repository.deleteHealthGoal(goalId)
-        loadAllData()
-    }
-    
-    fun updateGoalProgress(goalId: String, currentValue: Double) {
-        repository.updateGoalProgress(goalId, currentValue)
-        loadAllData()
+        getAllHealthGoals()
     }
 }

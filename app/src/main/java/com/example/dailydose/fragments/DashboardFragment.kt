@@ -17,6 +17,8 @@ import com.example.dailydose.model.HealthEntry
 import com.example.dailydose.model.HealthType
 import com.example.dailydose.utils.BmiCalculator
 import com.example.dailydose.viewmodel.HealthViewModel
+import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import java.util.*
 
     class DashboardFragment : Fragment() {
@@ -25,7 +27,7 @@ import java.util.*
         private val binding get() = _binding!!
 
         private lateinit var healthRepository: HealthRepository
-        private lateinit var healthViewModel: HealthViewModel
+        private lateinit var healthViewModel:HealthViewModel
         private lateinit var todayEntriesAdapter: HealthEntryAdapter
         private lateinit var goalsAdapter: GoalAdapter
 
@@ -81,6 +83,11 @@ import java.util.*
         
         binding.cardAddBloodPressure?.setOnClickListener {
             navigateToAddEntry(HealthType.BLOOD_PRESSURE)
+        }
+
+        // BMI Calculator click listener
+        binding.cardBmi?.setOnClickListener {
+            showBmiCalculatorDialog()
         }
 
             // Additional cards for landscape layout (only if they exist)
@@ -144,6 +151,43 @@ import java.util.*
         } else {
             binding.cardBmi?.visibility = View.GONE
         }
+    }
+
+    private fun showBmiCalculatorDialog() {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_bmi_calculator, null)
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .setTitle("BMI Calculator")
+            .setPositiveButton("Calculate") { _, _ ->
+                val weightText = dialogView.findViewById<android.widget.EditText>(R.id.et_weight).text.toString()
+                val heightText = dialogView.findViewById<android.widget.EditText>(R.id.et_height).text.toString()
+                
+                if (weightText.isNotEmpty() && heightText.isNotEmpty()) {
+                    try {
+                        val weight = weightText.toDouble()
+                        val height = heightText.toDouble() / 100.0 // Convert cm to meters
+                        val bmi = BmiCalculator.calculateBMI(weight, height)
+                        val category = BmiCalculator.getBMICategory(bmi)
+                        val advice = BmiCalculator.getBMIAdvice(bmi)
+                        
+                        val message = "Your BMI: ${String.format("%.1f", bmi)}\nCategory: ${category.displayName}\nAdvice: $advice"
+                        
+                        AlertDialog.Builder(requireContext())
+                            .setTitle("BMI Result")
+                            .setMessage(message)
+                            .setPositiveButton("OK", null)
+                            .show()
+                    } catch (e: NumberFormatException) {
+                        Toast.makeText(context, "Please enter valid numbers", Toast.LENGTH_SHORT).show()
+                    }
+                } else {
+                    Toast.makeText(context, "Please enter both weight and height", Toast.LENGTH_SHORT).show()
+                }
+            }
+            .setNegativeButton("Cancel", null)
+            .create()
+        
+        dialog.show()
     }
 
         override fun onResume() {

@@ -37,6 +37,15 @@ class HealthRepository(private val context: Context) {
             .take(limit)
     }
 
+    fun updateHealthEntry(entry: HealthEntry) {
+        val entries = getAllHealthEntries().toMutableList()
+        val entryIndex = entries.indexOfFirst { it.id == entry.id }
+        if (entryIndex != -1) {
+            entries[entryIndex] = entry
+            saveEntries(entries)
+        }
+    }
+
     fun deleteHealthEntry(entryId: String) {
         val entries = getAllHealthEntries().toMutableList()
         entries.removeAll { it.id == entryId }
@@ -63,6 +72,15 @@ class HealthRepository(private val context: Context) {
 
     fun getActiveGoals(): List<HealthGoal> {
         return getAllHealthGoals().filter { it.isActive }
+    }
+
+    fun updateHealthGoal(goal: HealthGoal) {
+        val goals = getAllHealthGoals().toMutableList()
+        val goalIndex = goals.indexOfFirst { it.id == goal.id }
+        if (goalIndex != -1) {
+            goals[goalIndex] = goal
+            saveGoals(goals)
+        }
     }
 
     fun updateGoalProgress(goalId: String, currentValue: Double) {

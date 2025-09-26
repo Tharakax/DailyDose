@@ -11,29 +11,49 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="24dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="24dp">
 
-        <!-- Welcome Card -->
+        <!-- Welcome Card with Gradient -->
         <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/card_background">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="24dp"
+                android:background="@drawable/gradient_dashboard">
 
-                <TextView
-                    android:layout_width="wrap_content"
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="@string/welcome_back"
-                    android:textSize="24sp"
-                    android:textStyle="bold"
-                    android:textColor="@color/primary_color" />
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/welcome_back"
+                        android:textSize="28sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white" />
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/animated_heart"
+                        android:background="@drawable/circle_background"
+                        android:padding="8dp" />
+
+                </LinearLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -41,7 +61,8 @@
                     android:layout_marginTop="8dp"
                     android:text="@string/track_your_health"
                     android:textSize="16sp"
-                    android:textColor="@color/text_secondary" />
+                    android:textColor="@color/white"
+                    android:alpha="0.9" />
 
             </LinearLayout>
 
@@ -87,30 +108,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:layout_weight="1"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/card_background">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp"
+                    android:background="@drawable/gradient_add_entry">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="⚖️"
-                        android:textSize="32sp" />
+                        android:textSize="36sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:text="@string/weight"
                         android:textAlignment="center"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -122,30 +146,33 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:layout_weight="1"
-                app:cardCornerRadius="12dp"
-                app:cardElevation="4dp">
+                app:cardCornerRadius="16dp"
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/card_background">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="16dp">
+                    android:padding="20dp"
+                    android:background="@drawable/gradient_history">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="🩸"
-                        android:textSize="32sp" />
+                        android:textSize="36sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
+                        android:layout_marginTop="12dp"
                         android:text="@string/blood_pressure"
                         android:textAlignment="center"
-                        android:textSize="14sp"
-                        android:textStyle="bold" />
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:textColor="@color/white" />
 
                 </LinearLayout>
 
@@ -160,14 +187,16 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="16dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
+            app:cardCornerRadius="20dp"
+            app:cardElevation="8dp"
+            app:cardBackgroundColor="@color/card_background">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="24dp"
+                android:background="@drawable/gradient_todo">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -178,8 +207,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="📊"
-                        android:textSize="24sp"
-                        android:layout_marginEnd="12dp" />
+                        android:textSize="32sp"
+                        android:layout_marginEnd="16dp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -191,18 +220,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/bmi_calculator"
-                            android:textSize="18sp"
+                            android:textSize="20sp"
                             android:textStyle="bold"
-                            android:textColor="@color/text_primary" />
+                            android:textColor="@color/white" />
 
                         <TextView
                             android:id="@+id/tv_bmi_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:textSize="24sp"
+                            android:layout_marginTop="8dp"
+                            android:textSize="32sp"
                             android:textStyle="bold"
-                            android:textColor="@color/primary_color"
+                            android:textColor="@color/white"
                             tools:text="22.5" />
 
                         <TextView
@@ -210,25 +239,28 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:textSize="14sp"
-                            android:textColor="@color/text_secondary"
+                            android:textSize="16sp"
+                            android:textColor="@color/white"
+                            android:alpha="0.9"
                             tools:text="Normal Weight" />
 
                     </LinearLayout>
 
-                    <TextView
-                        android:id="@+id/tv_bmi_advice"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:textSize="12sp"
-                        android:textColor="@color/text_secondary"
-                        android:maxLines="2"
-                        android:ellipsize="end"
-                        tools:text="Great! You're in a healthy weight range." />
-
                 </LinearLayout>
 
-            </LinearLayout>
+                <TextView
+                    android:id="@+id/tv_bmi_advice"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textSize="14sp"
+                    android:textColor="@color/white"
+                    android:alpha="0.8"
+                    android:maxLines="3"
+                    android:ellipsize="end"
+                    tools:text="Great! You're in a healthy weight range." />
+
+                </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 

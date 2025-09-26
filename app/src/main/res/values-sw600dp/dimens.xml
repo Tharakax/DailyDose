@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Tablet dimensions -->
-    <dimen name="card_margin">24dp</dimen>
-    <dimen name="content_padding">24dp</dimen>
-    <dimen name="text_size_large">20sp</dimen>
-    <dimen name="text_size_medium">16sp</dimen>
-    <dimen name="text_size_small">14sp</dimen>
+    <!-- Tablet-specific dimensions -->
+    <dimen name="tablet_padding">32dp</dimen>
+    <dimen name="tablet_margin">24dp</dimen>
+    <dimen name="tablet_text_size_large">20sp</dimen>
+    <dimen name="tablet_text_size_medium">18sp</dimen>
+    <dimen name="tablet_card_elevation">8dp</dimen>
+    <dimen name="tablet_fab_margin">24dp</dimen>
 </resources>

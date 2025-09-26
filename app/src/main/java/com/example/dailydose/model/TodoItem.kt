@@ -19,3 +19,4 @@ enum class Priority(val displayName: String, val color: String) {
     HIGH("High", "#F44336"),
     URGENT("Urgent", "#9C27B0")
 }
+

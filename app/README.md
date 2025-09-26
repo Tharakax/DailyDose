@@ -189,3 +189,4 @@ For support, email support@dailydose.app or create an issue in the repository.
 ---
 
 **Daily Health Tracker** - Your personal health companion 📱💚
+

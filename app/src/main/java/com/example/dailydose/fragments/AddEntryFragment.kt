@@ -128,3 +128,4 @@ class AddEntryFragment : Fragment() {
         _binding = null
     }
 }
+
