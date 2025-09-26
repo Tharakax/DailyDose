@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp">
+
+    <!-- App Icon -->
+    <androidx.cardview.widget.CardView
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginBottom="32dp"
+        app:cardCornerRadius="60dp"
+        app:cardElevation="12dp"
+        app:cardBackgroundColor="@color/onboarding_primary">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="💊"
+                android:textSize="48sp" />
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <!-- Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Welcome to DailyDose"
+        android:textSize="28sp"
+        android:textStyle="bold"
+        android:textColor="@color/onboarding_text_primary"
+        android:layout_marginBottom="16dp"
+        android:gravity="center" />
+
+    <!-- Description -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="This app will help you track your health and build healthy habits for a better lifestyle!"
+        android:textSize="16sp"
+        android:textColor="@color/onboarding_text_secondary"
+        android:gravity="center"
+        android:lineSpacingExtra="4dp"
+        android:maxWidth="300dp" />
+
+</LinearLayout>

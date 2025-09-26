@@ -19,6 +19,10 @@ import com.example.dailydose.utils.BmiCalculator
 import com.example.dailydose.viewmodel.HealthViewModel
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
+import android.view.animation.AnimationUtils
+import android.view.animation.Animation
+import com.example.dailydose.adapters.HealthTypeAdapter
+import com.example.dailydose.databinding.DialogAddEntryBinding
 import java.util.*
 
     class DashboardFragment : Fragment() {
@@ -40,14 +44,15 @@ import java.util.*
             return binding.root
         }
 
-        override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-            super.onViewCreated(view, savedInstanceState)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
 
-            setupViewModel()
-            setupRecyclerViews()
-            setupClickListeners()
-            loadData()
-        }
+        setupViewModel()
+        setupRecyclerViews()
+        setupClickListeners()
+        loadData()
+        startAnimations()
+    }
 
         private fun setupViewModel() {
             healthRepository = HealthRepository(requireContext())
@@ -76,17 +81,21 @@ import java.util.*
     }
 
     private fun setupClickListeners() {
-        // Quick action buttons
-        binding.cardAddWeight?.setOnClickListener {
-            navigateToAddEntry(HealthType.WEIGHT)
-        }
-        
-        binding.cardAddBloodPressure?.setOnClickListener {
-            navigateToAddEntry(HealthType.BLOOD_PRESSURE)
+        // Add Entry button with animation
+        binding.cardAddEntry?.setOnClickListener { view ->
+            animateCardClick(view)
+            showAddEntryDialog()
         }
 
-        // BMI Calculator click listener
-        binding.cardBmi?.setOnClickListener {
+        // BMI Calculator button click listener
+        binding.cardBmiCalculator?.setOnClickListener { view ->
+            animateCardClick(view)
+            showBmiCalculatorDialog()
+        }
+
+        // BMI Card click listener (existing BMI display)
+        binding.cardBmi?.setOnClickListener { view ->
+            animateCardClick(view)
             showBmiCalculatorDialog()
         }
 
@@ -111,12 +120,103 @@ import java.util.*
         }
 
         private fun navigateToAddEntry(healthType: HealthType) {
-            // Navigate to AddEntryFragment with pre-selected type
-            val bundle = Bundle().apply {
-                putString("selected_type", healthType.name)
+            showAddEntryDialog(healthType)
+        }
+
+        private fun showAddEntryDialog(preSelectedType: HealthType? = null) {
+            val dialogBinding = DialogAddEntryBinding.inflate(layoutInflater)
+            val dialog = AlertDialog.Builder(requireContext())
+                .setView(dialogBinding.root)
+                .create()
+
+            var selectedHealthType: HealthType? = preSelectedType
+
+            // Setup health type dropdown
+            val healthTypes = HealthType.values().toList()
+            val healthTypeNames = healthTypes.map { it.displayName }
+            
+            // Set initial selection if pre-selected
+            preSelectedType?.let { 
+                dialogBinding.etHealthType.setText(it.displayName)
+                updateValueHint(dialogBinding, it)
             }
-            // Use findNavController for proper navigation
-            findNavController().navigate(R.id.addEntryFragment, bundle)
+
+            // Health type dropdown click listener
+            dialogBinding.etHealthType.setOnClickListener {
+                showHealthTypeSelectionDialog(healthTypes) { selectedType ->
+                    selectedHealthType = selectedType
+                    dialogBinding.etHealthType.setText(selectedType.displayName)
+                    updateValueHint(dialogBinding, selectedType)
+                }
+            }
+
+            // Save button
+            dialogBinding.btnSave.setOnClickListener {
+                val title = dialogBinding.etTitle.text.toString().trim()
+                val valueText = dialogBinding.etValue.text.toString().trim()
+                val description = dialogBinding.etDescription.text.toString().trim()
+
+                if (title.isEmpty()) {
+                    Toast.makeText(context, "Please enter a title", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (selectedHealthType == null) {
+                    Toast.makeText(context, "Please select a health type", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (valueText.isEmpty()) {
+                    Toast.makeText(context, "Please enter a value", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                val value = try {
+                    valueText.toDouble()
+                } catch (e: NumberFormatException) {
+                    Toast.makeText(context, "Please enter a valid number", Toast.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                val entry = HealthEntry(
+                    id = UUID.randomUUID().toString(),
+                    type = selectedHealthType!!,
+                    value = value,
+                    unit = selectedHealthType!!.unit,
+                    date = Date(),
+                    timestamp = System.currentTimeMillis(),
+                    notes = if (description.isNotEmpty()) "$title - $description" else title
+                )
+
+                healthRepository.saveHealthEntry(entry)
+                Toast.makeText(context, "Entry saved successfully", Toast.LENGTH_SHORT).show()
+
+                dialog.dismiss()
+                loadData() // Refresh dashboard data
+            }
+
+            // Cancel button
+            dialogBinding.btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
+
+            dialog.show()
+        }
+
+        private fun updateValueHint(binding: DialogAddEntryBinding, type: HealthType) {
+            binding.tilValue.hint = "Enter ${type.displayName} (${type.unit})"
+        }
+
+        private fun showHealthTypeSelectionDialog(healthTypes: List<HealthType>, onTypeSelected: (HealthType) -> Unit) {
+            val typeNames = healthTypes.map { it.displayName }.toTypedArray()
+            
+            AlertDialog.Builder(requireContext())
+                .setTitle("Select Health Type")
+                .setItems(typeNames) { _, which ->
+                    val selectedType = healthTypes[which]
+                    onTypeSelected(selectedType)
+                }
+                .show()
         }
 
     private fun loadData() {
@@ -158,36 +258,104 @@ import java.util.*
         val dialog = AlertDialog.Builder(requireContext())
             .setView(dialogView)
             .setTitle("BMI Calculator")
-            .setPositiveButton("Calculate") { _, _ ->
-                val weightText = dialogView.findViewById<android.widget.EditText>(R.id.et_weight).text.toString()
-                val heightText = dialogView.findViewById<android.widget.EditText>(R.id.et_height).text.toString()
-                
-                if (weightText.isNotEmpty() && heightText.isNotEmpty()) {
-                    try {
-                        val weight = weightText.toDouble()
-                        val height = heightText.toDouble() / 100.0 // Convert cm to meters
-                        val bmi = BmiCalculator.calculateBMI(weight, height)
-                        val category = BmiCalculator.getBMICategory(bmi)
-                        val advice = BmiCalculator.getBMIAdvice(bmi)
-                        
-                        val message = "Your BMI: ${String.format("%.1f", bmi)}\nCategory: ${category.displayName}\nAdvice: $advice"
-                        
-                        AlertDialog.Builder(requireContext())
-                            .setTitle("BMI Result")
-                            .setMessage(message)
-                            .setPositiveButton("OK", null)
-                            .show()
-                    } catch (e: NumberFormatException) {
-                        Toast.makeText(context, "Please enter valid numbers", Toast.LENGTH_SHORT).show()
-                    }
-                } else {
-                    Toast.makeText(context, "Please enter both weight and height", Toast.LENGTH_SHORT).show()
-                }
-            }
-            .setNegativeButton("Cancel", null)
             .create()
         
+        // Calculate button
+        dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn_calculate)?.setOnClickListener {
+            val weightText = dialogView.findViewById<android.widget.EditText>(R.id.et_weight).text.toString()
+            val heightText = dialogView.findViewById<android.widget.EditText>(R.id.et_height).text.toString()
+            
+            if (weightText.isEmpty() || heightText.isEmpty()) {
+                Toast.makeText(context, "Please enter both weight and height", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+            
+            try {
+                val weight = weightText.toDouble()
+                val height = heightText.toDouble() / 100.0 // Convert cm to meters
+                val bmi = BmiCalculator.calculateBMI(weight, height)
+                val category = BmiCalculator.getBMICategory(bmi)
+                val advice = BmiCalculator.getBMIAdvice(bmi)
+                
+                val message = "Your BMI: ${String.format("%.1f", bmi)}\nCategory: ${category.displayName}\nAdvice: $advice"
+                
+                AlertDialog.Builder(requireContext())
+                    .setTitle("BMI Result")
+                    .setMessage(message)
+                    .setPositiveButton("OK", null)
+                    .show()
+                    
+                dialog.dismiss()
+            } catch (e: NumberFormatException) {
+                Toast.makeText(context, "Please enter valid numbers", Toast.LENGTH_SHORT).show()
+            }
+        }
+        
+        // Cancel button
+        dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btn_cancel)?.setOnClickListener {
+            dialog.dismiss()
+        }
+        
         dialog.show()
+    }
+
+    private fun startAnimations() {
+        // Animate welcome section
+        binding.root.findViewById<View>(R.id.welcome_section)?.let { welcomeSection ->
+            val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+            welcomeSection.startAnimation(fadeIn)
+        }
+
+        // Animate quick action cards with staggered delay
+        binding.cardAddEntry?.let { card ->
+            val slideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_bottom)
+            slideIn.startOffset = 100
+            card.startAnimation(slideIn)
+        }
+
+        binding.cardBmiCalculator?.let { card ->
+            val slideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_bottom)
+            slideIn.startOffset = 200
+            card.startAnimation(slideIn)
+        }
+
+        // Animate BMI card
+        binding.cardBmi?.let { card ->
+            val scaleIn = AnimationUtils.loadAnimation(context, R.anim.scale_in)
+            scaleIn.startOffset = 300
+            card.startAnimation(scaleIn)
+        }
+
+        // Animate RecyclerViews
+        binding.rvTodayEntries?.let { rv ->
+            val slideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_right)
+            slideIn.startOffset = 400
+            rv.startAnimation(slideIn)
+        }
+
+        binding.rvGoals?.let { rv ->
+            val slideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_right)
+            slideIn.startOffset = 500
+            rv.startAnimation(slideIn)
+        }
+    }
+
+    private fun animateCardClick(view: View) {
+        val scaleDown = AnimationUtils.loadAnimation(context, R.anim.scale_in)
+        scaleDown.duration = 100
+        scaleDown.interpolator = android.view.animation.DecelerateInterpolator()
+        
+        view.startAnimation(scaleDown)
+        
+        scaleDown.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {}
+            override fun onAnimationEnd(animation: Animation?) {
+                val scaleUp = AnimationUtils.loadAnimation(context, R.anim.bounce_in)
+                scaleUp.duration = 200
+                view.startAnimation(scaleUp)
+            }
+            override fun onAnimationRepeat(animation: Animation?) {}
+        })
     }
 
         override fun onResume() {

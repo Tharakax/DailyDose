@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageView
 import android.widget.TextView
+import com.google.android.material.button.MaterialButton
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dailydose.R
 import com.example.dailydose.model.Priority
@@ -31,8 +32,8 @@ class TodoAdapter(
         val tvCategory: TextView = itemView.findViewById(R.id.tv_category)
         val tvPriority: TextView = itemView.findViewById(R.id.tv_priority)
         val tvDueDate: TextView = itemView.findViewById(R.id.tv_due_date)
-        val ivEdit: ImageView = itemView.findViewById(R.id.iv_edit)
-        val ivDelete: ImageView = itemView.findViewById(R.id.iv_delete)
+        val btnEdit: MaterialButton = itemView.findViewById(R.id.btn_edit)
+        val btnDelete: MaterialButton = itemView.findViewById(R.id.btn_delete)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TodoViewHolder {
@@ -90,11 +91,11 @@ class TodoAdapter(
             }
         }
         
-        holder.ivEdit.setOnClickListener {
+        holder.btnEdit.setOnClickListener {
             onTodoEdit(todo)
         }
         
-        holder.ivDelete.setOnClickListener {
+        holder.btnDelete.setOnClickListener {
             onTodoDelete(todo)
         }
         

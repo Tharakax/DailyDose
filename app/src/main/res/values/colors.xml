@@ -8,12 +8,12 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     
-    <!-- Modern Health App Color Palette -->
+    <!-- Modern Health App Color Palette - Vibrant Calming Colors -->
     <!-- Primary Colors -->
-    <color name="primary_color">#FF2196F3</color>
-    <color name="primary_dark">#FF1976D2</color>
-    <color name="primary_light">#FFBBDEFB</color>
-    <color name="accent_color">#FFFF5722</color>
+    <color name="primary_color">#FF6366F1</color> <!-- Indigo -->
+    <color name="primary_dark">#FF4F46E5</color>
+    <color name="primary_light">#FFE0E7FF</color>
+    <color name="accent_color">#FF10B981</color> <!-- Emerald -->
     
     <!-- Priority Colors -->
     <color name="priority_low">#FF4CAF50</color>
@@ -22,55 +22,59 @@
     <color name="priority_urgent">#FF9C27B0</color>
     
     <!-- Page-Specific Themes -->
-    <!-- Dashboard Theme - Blue -->
-    <color name="dashboard_primary">#FF2196F3</color>
-    <color name="dashboard_primary_dark">#FF1976D2</color>
-    <color name="dashboard_accent">#FF03DAC5</color>
-    <color name="dashboard_background">#FFF8F9FA</color>
+    <!-- Dashboard Theme - Vibrant Calming Blue -->
+    <color name="dashboard_primary">#FF3B82F6</color>
+    <color name="dashboard_primary_dark">#FF2563EB</color>
+    <color name="dashboard_accent">#FF60A5FA</color>
+    <color name="dashboard_background">#FFF8FAFC</color>
     
-    <!-- Add Entry Theme - Green -->
-    <color name="add_entry_primary">#FF4CAF50</color>
-    <color name="add_entry_primary_dark">#FF388E3C</color>
-    <color name="add_entry_accent">#FF8BC34A</color>
-    <color name="add_entry_background">#FFF1F8E9</color>
+    <!-- Add Entry Theme - Vibrant Calming Green -->
+    <color name="add_entry_primary">#FF10B981</color>
+    <color name="add_entry_primary_dark">#FF059669</color>
+    <color name="add_entry_accent">#FF34D399</color>
+    <color name="add_entry_background">#FFF0FDF4</color>
     
-    <!-- History Theme - Purple -->
-    <color name="history_primary">#FF9C27B0</color>
-    <color name="history_primary_dark">#FF7B1FA2</color>
-    <color name="history_accent">#FFE1BEE7</color>
-    <color name="history_background">#FFF3E5F5</color>
+    <!-- History Theme - Vibrant Calming Purple -->
+    <color name="history_primary">#FF8B5CF6</color>
+    <color name="history_primary_dark">#FF7C3AED</color>
+    <color name="history_accent">#FFA78BFA</color>
+    <color name="history_background">#FFF8FAFC</color>
     
-    <!-- Todo Theme - Orange -->
-    <color name="todo_primary">#FFFF9800</color>
-    <color name="todo_primary_dark">#FFF57C00</color>
-    <color name="todo_accent">#FFFFB74D</color>
-    <color name="todo_background">#FFFFF3E0</color>
+    <!-- Todo Theme - Vibrant Calming Colors -->
+    <color name="todo_primary">#FF8B5CF6</color> <!-- Purple -->
+    <color name="todo_primary_dark">#FF7C3AED</color>
+    <color name="todo_primary_light">#FFE0E7FF</color>
+    <color name="todo_accent">#FFA78BFA</color>
+    <color name="todo_background">#FFF8FAFC</color>
+    <color name="todo_surface">#FFFFFFFF</color>
+    <color name="todo_card">#FFF1F5F9</color>
     
-    <!-- Settings Theme - Teal -->
-    <color name="settings_primary">#FF009688</color>
-    <color name="settings_primary_dark">#FF00695C</color>
-    <color name="settings_accent">#FF4DB6AC</color>
-    <color name="settings_background">#FFE0F2F1</color>
+    <!-- Settings Theme - Vibrant Calming Teal -->
+    <color name="settings_primary">#FF14B8A6</color>
+    <color name="settings_primary_dark">#FF0F766E</color>
+    <color name="settings_accent">#FF5EEAD4</color>
+    <color name="settings_background">#FFF0FDFA</color>
     
-    <!-- BMI Theme - Red -->
-    <color name="bmi_primary">#FFF44336</color>
-    <color name="bmi_primary_dark">#FFD32F2F</color>
-    <color name="bmi_accent">#FFFFCDD2</color>
-    <color name="bmi_background">#FFFDEDEC</color>
+    <!-- BMI Theme - Vibrant Calming Red -->
+    <color name="bmi_primary">#FFEF4444</color>
+    <color name="bmi_primary_dark">#FFDC2626</color>
+    <color name="bmi_accent">#FFF87171</color>
+    <color name="bmi_background">#FFFEF2F2</color>
     
-    <!-- Reminder Theme - Indigo -->
-    <color name="reminder_primary">#FF3F51B5</color>
-    <color name="reminder_primary_dark">#FF303F9F</color>
-    <color name="reminder_accent">#FF9FA8DA</color>
-    <color name="reminder_background">#FFE8EAF6</color>
+    <!-- Reminder Theme - Vibrant Calming Indigo -->
+    <color name="reminder_primary">#FF6366F1</color>
+    <color name="reminder_primary_dark">#FF4F46E5</color>
+    <color name="reminder_accent">#FF818CF8</color>
+    <color name="reminder_background">#FFF0F4FF</color>
     
-    <!-- Common Colors -->
-    <color name="background_color">#FFF8F9FA</color>
+    <!-- Common Colors - Vibrant Calming -->
+    <color name="background_color">#FFF8FAFC</color>
     <color name="surface_color">#FFFFFFFF</color>
-    <color name="text_primary">#FF212121</color>
-    <color name="text_secondary">#FF757575</color>
-    <color name="text_hint">#FFBDBDBD</color>
+    <color name="text_primary">#FF1E293B</color>
+    <color name="text_secondary">#FF64748B</color>
+    <color name="text_hint">#FF94A3B8</color>
     <color name="error_color">#FFF44336</color>
+    <color name="error_color_light">#FFFFEBEE</color>
     <color name="success_color">#FF4CAF50</color>
     <color name="warning_color">#FFFF9800</color>
     <color name="info_color">#FF2196F3</color>
@@ -91,4 +95,13 @@
     <color name="status_warning">#FFFF9800</color>
     <color name="status_danger">#FFF44336</color>
     <color name="status_info">#FF2196F3</color>
+    
+    <!-- Onboarding Colors - Light Theme -->
+    <color name="onboarding_background">#FFF8FAFC</color>
+    <color name="onboarding_primary">#FF8B5CF6</color>
+    <color name="onboarding_primary_light">#FFE0E7FF</color>
+    <color name="onboarding_text_primary">#FF1E293B</color>
+    <color name="onboarding_text_secondary">#FF64748B</color>
+    <color name="onboarding_accent">#FF10B981</color>
+    <color name="onboarding_surface">#FFFFFFFF</color>
 </resources>

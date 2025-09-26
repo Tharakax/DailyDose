@@ -10,6 +10,8 @@ import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
+import android.view.animation.AnimationUtils
+import android.view.animation.Animation
 import com.example.dailydose.R
 import com.example.dailydose.adapters.TodoAdapter
 import com.example.dailydose.data.TodoRepository
@@ -49,6 +51,7 @@ class TodoListFragment : Fragment() {
         setupRecyclerView()
         setupClickListeners()
         loadData()
+        startAnimations()
     }
 
     private fun setupRepository() {
@@ -78,8 +81,62 @@ class TodoListFragment : Fragment() {
         }
     }
 
+    private fun startAnimations() {
+        // Animate header section
+        binding.root.findViewById<View>(R.id.header_section)?.let { headerSection ->
+            val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+            headerSection.startAnimation(fadeIn)
+        }
+
+        // Animate filter buttons
+        binding.btnFilterAll?.let { btn ->
+            val slideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_bottom)
+            slideIn.startOffset = 100
+            btn.startAnimation(slideIn)
+        }
+
+        binding.btnFilterActive?.let { btn ->
+            val slideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_bottom)
+            slideIn.startOffset = 150
+            btn.startAnimation(slideIn)
+        }
+
+        binding.btnFilterCompleted?.let { btn ->
+            val slideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_bottom)
+            slideIn.startOffset = 200
+            btn.startAnimation(slideIn)
+        }
+
+        binding.btnFilterPriority?.let { btn ->
+            val slideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_bottom)
+            slideIn.startOffset = 250
+            btn.startAnimation(slideIn)
+        }
+
+        // Animate FAB
+        binding.fabAddTodo?.let { fab ->
+            val bounceIn = AnimationUtils.loadAnimation(context, R.anim.bounce_in)
+            bounceIn.startOffset = 300
+            fab.startAnimation(bounceIn)
+        }
+
+        // Animate RecyclerView
+        binding.rvTodos?.let { rv ->
+            val slideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_right)
+            slideIn.startOffset = 400
+            rv.startAnimation(slideIn)
+        }
+    }
+
     private fun setupClickListeners() {
-        binding.fabAddTodo.setOnClickListener {
+        binding.fabAddTodo.setOnClickListener { view ->
+            animateFabClick(view)
+            showAddTodoDialog()
+        }
+        
+        // Add Your First Task button in empty state
+        binding.btnAddFirstTask?.setOnClickListener { view ->
+            animateFabClick(view)
             showAddTodoDialog()
         }
         
@@ -141,6 +198,24 @@ class TodoListFragment : Fragment() {
             binding.emptyState.visibility = View.GONE
             binding.rvTodos.visibility = View.VISIBLE
         }
+    }
+
+    private fun animateFabClick(view: View) {
+        val scaleDown = AnimationUtils.loadAnimation(context, R.anim.scale_in)
+        scaleDown.duration = 100
+        scaleDown.interpolator = android.view.animation.DecelerateInterpolator()
+        
+        view.startAnimation(scaleDown)
+        
+        scaleDown.setAnimationListener(object : Animation.AnimationListener {
+            override fun onAnimationStart(animation: Animation?) {}
+            override fun onAnimationEnd(animation: Animation?) {
+                val scaleUp = AnimationUtils.loadAnimation(context, R.anim.bounce_in)
+                scaleUp.duration = 200
+                view.startAnimation(scaleUp)
+            }
+            override fun onAnimationRepeat(animation: Animation?) {}
+        })
     }
 
     private fun showAddTodoDialog() {

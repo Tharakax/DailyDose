@@ -6,6 +6,7 @@ import androidx.core.view.WindowCompat
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.dailydose.databinding.ActivityMainBinding
+import android.view.animation.AnimationUtils
 
 class MainActivity : AppCompatActivity() {
 
@@ -20,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         
         setupNavigation()
+        startAnimations()
     }
 
     private fun setupNavigation() {
@@ -28,5 +30,14 @@ class MainActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
 
         binding.bottomNavigation.setupWithNavController(navController)
+    }
+
+    private fun startAnimations() {
+        // Animate bottom navigation
+        binding.bottomNavigation?.let { nav ->
+            val slideIn = AnimationUtils.loadAnimation(this, R.anim.slide_in_from_bottom)
+            slideIn.startOffset = 500
+            nav.startAnimation(slideIn)
+        }
     }
 }

@@ -8,6 +8,7 @@ data class HealthEntry(
     val value: Double,
     val unit: String,
     val date: Date = Date(),
+    val timestamp: Long = System.currentTimeMillis(),
     val notes: String = ""
 )
 

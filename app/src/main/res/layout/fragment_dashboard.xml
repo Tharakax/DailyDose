@@ -17,6 +17,7 @@
 
         <!-- Welcome Card with Gradient -->
         <androidx.cardview.widget.CardView
+            android:id="@+id/welcome_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
@@ -37,14 +38,6 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
-                    <TextView
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/welcome_back"
-                        android:textSize="28sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/white" />
 
                     <ImageView
                         android:layout_width="48dp"
@@ -102,8 +95,9 @@
             android:orientation="horizontal"
             android:weightSum="2">
 
+            <!-- Add Entry Button -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_add_weight"
+                android:id="@+id/card_add_entry"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
@@ -123,14 +117,14 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="⚖️"
+                        android:text="➕"
                         android:textSize="36sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="@string/weight"
+                        android:text="@string/add_entry"
                         android:textAlignment="center"
                         android:textSize="16sp"
                         android:textStyle="bold"
@@ -140,8 +134,9 @@
 
             </androidx.cardview.widget.CardView>
 
+            <!-- BMI Calculator Button -->
             <androidx.cardview.widget.CardView
-                android:id="@+id/card_add_blood_pressure"
+                android:id="@+id/card_bmi_calculator"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -156,19 +151,19 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="20dp"
-                    android:background="@drawable/gradient_history">
+                    android:background="@drawable/gradient_settings">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="🩸"
+                        android:text="📊"
                         android:textSize="36sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="12dp"
-                        android:text="@string/blood_pressure"
+                        android:text="@string/bmi_calculator"
                         android:textAlignment="center"
                         android:textSize="16sp"
                         android:textStyle="bold"

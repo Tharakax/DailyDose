@@ -12,12 +12,6 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/addEntryFragment"
-        android:name="com.example.dailydose.fragments.AddEntryFragment"
-        android:label="@string/add_entry"
-        tools:layout="@layout/fragment_add_entry" />
-
-    <fragment
         android:id="@+id/historyFragment"
         android:name="com.example.dailydose.fragments.HistoryFragment"
         android:label="@string/history"
