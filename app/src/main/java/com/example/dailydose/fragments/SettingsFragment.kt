@@ -127,17 +127,6 @@ class SettingsFragment : Fragment() {
             }
         }
 
-        // Meditation button
-        binding.btnMeditation?.setOnClickListener {
-            try {
-                // Navigate to meditation fragment
-                val navController = findNavController()
-                navController.navigate(R.id.meditationFragment)
-            } catch (e: Exception) {
-                e.printStackTrace()
-                Toast.makeText(context, "Meditation feature coming soon", Toast.LENGTH_SHORT).show()
-            }
-        }
 
         // Manage Goals button
         binding.btnManageGoals?.setOnClickListener {

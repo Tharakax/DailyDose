@@ -224,52 +224,6 @@
 
         </androidx.cardview.widget.CardView>
 
-        <!-- Meditation Section -->
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:cardCornerRadius="24dp"
-            app:cardElevation="2dp"
-            app:cardBackgroundColor="@color/card_background">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="24dp"
-                android:background="@drawable/gradient_modern_pink">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="🧘 Meditation"
-                    android:textSize="20sp"
-                    android:textStyle="bold"
-                    android:textColor="@android:color/white" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="Relax and meditate for better health"
-                    android:textSize="14sp"
-                    android:textColor="@android:color/white"
-                    android:alpha="0.9" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/btn_meditation"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:text="Start Meditation"
-                    android:textColor="@color/text_primary"
-                    app:cornerRadius="16dp"
-                    app:backgroundTint="@android:color/white" />
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
 
         <!-- Goals Section -->
         <androidx.cardview.widget.CardView

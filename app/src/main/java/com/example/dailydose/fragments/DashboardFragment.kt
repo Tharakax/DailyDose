@@ -92,6 +92,12 @@ import java.util.*
             showAddEntryDialog()
         }
 
+        // Meditation button click listener
+        binding.cardMeditation?.setOnClickListener { view ->
+            animateCardClick(view)
+            navigateToMeditation()
+        }
+
         // BMI Calculator button click listener
         binding.cardBmiCalculator?.setOnClickListener { view ->
             animateCardClick(view)
@@ -127,6 +133,16 @@ import java.util.*
 
         private fun navigateToAddEntry(healthType: HealthType) {
             showAddEntryDialog(healthType)
+        }
+
+        private fun navigateToMeditation() {
+            try {
+                val navController = findNavController()
+                navController.navigate(R.id.meditationFragment)
+            } catch (e: Exception) {
+                e.printStackTrace()
+                Toast.makeText(context, "Meditation feature coming soon", Toast.LENGTH_SHORT).show()
+            }
         }
 
         private fun showAddEntryDialog(preSelectedType: HealthType? = null) {
