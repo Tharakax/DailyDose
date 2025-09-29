@@ -12,10 +12,10 @@
         tools:layout="@layout/fragment_dashboard" />
 
     <fragment
-        android:id="@+id/historyFragment"
-        android:name="com.example.dailydose.fragments.HistoryFragment"
-        android:label="@string/history"
-        tools:layout="@layout/fragment_history" />
+        android:id="@+id/hydrationFragment"
+        android:name="com.example.dailydose.fragments.HydrationFragment"
+        android:label="@string/hydration"
+        tools:layout="@layout/fragment_hydration" />
 
     <fragment
         android:id="@+id/todoListFragment"

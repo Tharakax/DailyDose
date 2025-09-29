@@ -5,7 +5,7 @@
     <!-- Navigation -->
     <string name="dashboard">Dashboard</string>
     <string name="add_entry">Add Entry</string>
-    <string name="history">History</string>
+    <string name="hydration">Hydration</string>
     <string name="todo_list">Todo List</string>
     <string name="analytics">Analytics</string>
     <string name="meditation">Meditation</string>
