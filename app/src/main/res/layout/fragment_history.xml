@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:paddingTop="32dp"
+    android:background="@color/background_color"
+    android:paddingTop="24dp"
     tools:context=".fragments.HistoryFragment">
 
     <!-- Filter Options -->
@@ -14,7 +15,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:padding="20dp"
-        android:background="@color/history_background"
+        android:background="@color/background_color"
         android:weightSum="3">
 
         <com.google.android.material.button.MaterialButton
@@ -22,31 +23,37 @@
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
+            android:layout_marginEnd="12dp"
             android:layout_weight="1"
             android:text="@string/all"
-            app:cornerRadius="8dp" />
+            android:textColor="@color/primary_color"
+            app:cornerRadius="16dp"
+            app:strokeColor="@color/primary_color" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_filter_today"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="4dp"
-            android:layout_marginEnd="4dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginEnd="6dp"
             android:layout_weight="1"
             android:text="@string/today"
-            app:cornerRadius="8dp" />
+            android:textColor="@color/primary_color"
+            app:cornerRadius="16dp"
+            app:strokeColor="@color/primary_color" />
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btn_filter_week"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
+            android:layout_marginStart="12dp"
             android:layout_weight="1"
             android:text="@string/week"
-            app:cornerRadius="8dp" />
+            android:textColor="@color/primary_color"
+            app:cornerRadius="16dp"
+            app:strokeColor="@color/primary_color" />
 
     </LinearLayout>
 
@@ -56,7 +63,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
-        android:padding="16dp"
+        android:padding="20dp"
         tools:listitem="@layout/item_health_entry" />
 
     <!-- Empty State -->
@@ -67,32 +74,33 @@
         android:layout_weight="1"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="32dp"
+        android:padding="40dp"
         android:visibility="gone">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="📊"
-            android:textSize="64sp" />
+            android:textSize="72sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:text="@string/no_entries_found"
             android:textAlignment="center"
-            android:textSize="18sp"
+            android:textSize="20sp"
             android:textStyle="bold"
-            android:textColor="@color/text_secondary" />
+            android:textColor="@color/text_primary"
+            android:fontFamily="sans-serif-medium" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="12dp"
             android:text="@string/start_tracking_health"
             android:textAlignment="center"
-            android:textSize="14sp"
+            android:textSize="16sp"
             android:textColor="@color/text_secondary" />
 
     </LinearLayout>

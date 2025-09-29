@@ -22,3 +22,4 @@ class OnboardingAdapter(fragmentActivity: FragmentActivity) : FragmentStateAdapt
         }
     }
 }
+

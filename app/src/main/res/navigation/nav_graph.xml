@@ -24,9 +24,22 @@
         tools:layout="@layout/fragment_todo_list" />
 
     <fragment
+        android:id="@+id/analyticsFragment"
+        android:name="com.example.dailydose.fragments.AnalyticsFragment"
+        android:label="@string/analytics"
+        tools:layout="@layout/fragment_analytics" />
+
+
+    <fragment
         android:id="@+id/settingsFragment"
         android:name="com.example.dailydose.fragments.SettingsFragment"
         android:label="@string/settings"
         tools:layout="@layout/fragment_settings" />
+
+    <fragment
+        android:id="@+id/meditationFragment"
+        android:name="com.example.dailydose.fragments.MeditationFragment"
+        android:label="@string/meditation"
+        tools:layout="@layout/fragment_meditation" />
 
 </navigation>

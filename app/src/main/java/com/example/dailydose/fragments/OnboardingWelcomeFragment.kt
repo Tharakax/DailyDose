@@ -17,3 +17,4 @@ class OnboardingWelcomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_onboarding_welcome, container, false)
     }
 }
+

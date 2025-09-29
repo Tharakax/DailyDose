@@ -87,3 +87,4 @@ class HealthViewModel : ViewModel() {
         getAllHealthGoals()
     }
 }
+

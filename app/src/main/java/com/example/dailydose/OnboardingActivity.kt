@@ -77,8 +77,13 @@ class OnboardingActivity : AppCompatActivity() {
     }
 
     private fun navigateToMainActivity() {
+        // Mark onboarding as completed
+        val sharedPreferences = getSharedPreferences("onboarding_prefs", MODE_PRIVATE)
+        sharedPreferences.edit().putBoolean("onboarding_completed", true).apply()
+        
         val intent = Intent(this, MainActivity::class.java)
         startActivity(intent)
         finish()
     }
 }
+

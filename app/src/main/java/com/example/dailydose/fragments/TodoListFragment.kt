@@ -241,7 +241,6 @@ class TodoListFragment : Fragment() {
             dialogBinding.dialogTitle.text = getString(R.string.edit_todo)
             dialogBinding.etTodoTitle.setText(todo.title)
             dialogBinding.etTodoDescription.setText(todo.description)
-            dialogBinding.etTodoCategory.setText(todo.category)
             selectedDate = todo.dueDate
             if (selectedDate != null) {
                 selectedTime = Calendar.getInstance().apply { time = selectedDate }
@@ -297,7 +296,7 @@ class TodoListFragment : Fragment() {
                 todo.copy(
                     title = title,
                     description = dialogBinding.etTodoDescription.text.toString().trim(),
-                    category = dialogBinding.etTodoCategory.text.toString().trim().ifEmpty { "General" },
+                    category = "General",
                     priority = selectedPriority,
                     dueDate = selectedDate
                 )
@@ -306,7 +305,7 @@ class TodoListFragment : Fragment() {
                     id = UUID.randomUUID().toString(),
                     title = title,
                     description = dialogBinding.etTodoDescription.text.toString().trim(),
-                    category = dialogBinding.etTodoCategory.text.toString().trim().ifEmpty { "General" },
+                    category = "General",
                     priority = selectedPriority,
                     dueDate = selectedDate
                 )

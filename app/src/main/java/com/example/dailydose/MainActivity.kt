@@ -14,22 +14,34 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-
-        // Enable edge-to-edge display
-        WindowCompat.setDecorFitsSystemWindows(window, false)
         
-        setupNavigation()
-        startAnimations()
+        try {
+            binding = ActivityMainBinding.inflate(layoutInflater)
+            setContentView(binding.root)
+
+            // Enable edge-to-edge display
+            WindowCompat.setDecorFitsSystemWindows(window, false)
+            
+            setupNavigation()
+            startAnimations()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // Handle error gracefully
+        }
     }
 
     private fun setupNavigation() {
-        val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        val navController = navHostFragment.navController
+        try {
+            val navHostFragment = supportFragmentManager
+                .findFragmentById(R.id.nav_host_fragment) as? NavHostFragment
+            val navController = navHostFragment?.navController
 
-        binding.bottomNavigation.setupWithNavController(navController)
+            if (navController != null) {
+                binding.bottomNavigation.setupWithNavController(navController)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
     }
 
     private fun startAnimations() {

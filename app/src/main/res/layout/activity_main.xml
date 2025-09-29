@@ -5,6 +5,8 @@
     android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/background_color"
+    android:paddingTop="35dp"
     tools:context=".MainActivity">
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -14,7 +16,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginEnd="0dp"
         android:background="@color/surface_color"
-        android:elevation="8dp"
+        android:elevation="4dp"
         app:itemIconTint="@color/primary_color"
         app:itemTextColor="@color/primary_color"
         app:layout_constraintBottom_toBottomOf="parent"

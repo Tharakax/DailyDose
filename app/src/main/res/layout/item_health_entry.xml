@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="2dp">
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="1dp"
+    app:cardBackgroundColor="@color/card_background"
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <!-- Icon -->
         <TextView
@@ -20,8 +22,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_marginEnd="16dp"
-            android:textSize="24sp"
+            android:layout_marginEnd="20dp"
+            android:textSize="28sp"
             tools:text="⚖️" />
 
         <!-- Content -->
@@ -35,17 +37,18 @@
                 android:id="@+id/tv_type"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="17sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
+                android:fontFamily="sans-serif-medium"
                 tools:text="Weight" />
 
             <TextView
                 android:id="@+id/tv_value"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textSize="18sp"
+                android:layout_marginTop="6dp"
+                android:textSize="20sp"
                 android:textStyle="bold"
                 android:textColor="@color/primary_color"
                 tools:text="75.5 kg" />
@@ -54,8 +57,8 @@
                 android:id="@+id/tv_date"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textSize="12sp"
+                android:layout_marginTop="6dp"
+                android:textSize="13sp"
                 android:textColor="@color/text_secondary"
                 tools:text="Today, 2:30 PM" />
 
@@ -69,7 +72,7 @@
             android:layout_gravity="center_vertical"
             android:maxLines="2"
             android:ellipsize="end"
-            android:textSize="12sp"
+            android:textSize="13sp"
             android:textColor="@color/text_secondary"
             android:visibility="gone"
             tools:text="Feeling good today"

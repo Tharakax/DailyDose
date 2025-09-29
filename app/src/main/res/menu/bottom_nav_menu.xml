@@ -13,12 +13,11 @@
         android:icon="@drawable/ic_todo"
         android:title="@string/todo_list" />
     <item
+        android:id="@+id/analyticsFragment"
+        android:icon="@drawable/ic_analytics"
+        android:title="@string/analytics" />
+    <item
         android:id="@+id/settingsFragment"
         android:icon="@drawable/ic_settings"
         android:title="@string/settings" />
 </menu>
-
-
-
-
-

@@ -17,3 +17,4 @@ class OnboardingProgressFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_onboarding_progress, container, false)
     }
 }
+

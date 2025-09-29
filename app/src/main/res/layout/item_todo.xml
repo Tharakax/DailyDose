@@ -5,9 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="12dp"
-    app:cardCornerRadius="16dp"
-    app:cardElevation="6dp"
-    app:cardBackgroundColor="@color/todo_surface">
+    app:cardCornerRadius="20dp"
+    app:cardElevation="2dp"
+    app:cardBackgroundColor="@color/card_background">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -21,7 +21,7 @@
             android:layout_width="4dp"
             android:layout_height="match_parent"
             android:layout_marginEnd="16dp"
-            android:background="@color/todo_primary" />
+            android:background="@color/primary_color" />
 
         <!-- Checkbox -->
         <com.google.android.material.checkbox.MaterialCheckBox
@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_marginEnd="16dp"
-            app:buttonTint="@color/todo_primary" />
+            app:buttonTint="@color/primary_color" />
 
         <!-- Content -->
         <LinearLayout
@@ -46,6 +46,7 @@
                 android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/text_primary"
+                android:fontFamily="sans-serif-medium"
                 tools:text="Take medication" />
 
             <TextView
@@ -121,8 +122,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="8dp"
                 android:src="@drawable/ic_edit"
-                app:iconTint="@color/todo_primary"
-                app:backgroundTint="@color/todo_primary_light" />
+                app:iconTint="@color/primary_color"
+                app:backgroundTint="@color/soft_blue" />
 
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_delete"

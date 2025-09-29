@@ -17,3 +17,4 @@ class OnboardingTasksFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_onboarding_tasks, container, false)
     }
 }
+

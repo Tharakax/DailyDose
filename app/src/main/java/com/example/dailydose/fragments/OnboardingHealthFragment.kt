@@ -17,3 +17,4 @@ class OnboardingHealthFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_onboarding_health, container, false)
     }
 }
+

@@ -47,11 +47,16 @@ import java.util.*
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        setupViewModel()
-        setupRecyclerViews()
-        setupClickListeners()
-        loadData()
-        startAnimations()
+        try {
+            setupViewModel()
+            setupRecyclerViews()
+            setupClickListeners()
+            loadData()
+            startAnimations()
+        } catch (e: Exception) {
+            e.printStackTrace()
+            // Handle error gracefully
+        }
     }
 
         private fun setupViewModel() {
@@ -66,7 +71,7 @@ import java.util.*
             // Handle entry click if needed
         }
         binding.rvTodayEntries?.apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(requireContext())
             adapter = todayEntriesAdapter
         }
 
@@ -75,7 +80,7 @@ import java.util.*
             // Handle goal click if needed
         }
         binding.rvGoals?.apply {
-            layoutManager = LinearLayoutManager(context)
+            layoutManager = LinearLayoutManager(requireContext())
             adapter = goalsAdapter
         }
     }
@@ -98,6 +103,7 @@ import java.util.*
             animateCardClick(view)
             showBmiCalculatorDialog()
         }
+
 
             // Additional cards for landscape layout (only if they exist)
             try {
@@ -299,44 +305,45 @@ import java.util.*
         dialog.show()
     }
 
+
     private fun startAnimations() {
-        // Animate welcome section
+        // Animate welcome section with gentle fade
         binding.root.findViewById<View>(R.id.welcome_section)?.let { welcomeSection ->
-            val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in)
+            val fadeIn = AnimationUtils.loadAnimation(context, R.anim.fade_in_gentle)
             welcomeSection.startAnimation(fadeIn)
         }
 
-        // Animate quick action cards with staggered delay
+        // Animate quick action cards with gentle slide up
         binding.cardAddEntry?.let { card ->
-            val slideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_bottom)
-            slideIn.startOffset = 100
-            card.startAnimation(slideIn)
+            val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up_gentle)
+            slideUp.startOffset = 150
+            card.startAnimation(slideUp)
         }
 
         binding.cardBmiCalculator?.let { card ->
-            val slideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_bottom)
-            slideIn.startOffset = 200
-            card.startAnimation(slideIn)
+            val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up_gentle)
+            slideUp.startOffset = 300
+            card.startAnimation(slideUp)
         }
 
-        // Animate BMI card
+        // Animate BMI card with gentle scale
         binding.cardBmi?.let { card ->
-            val scaleIn = AnimationUtils.loadAnimation(context, R.anim.scale_in)
-            scaleIn.startOffset = 300
+            val scaleIn = AnimationUtils.loadAnimation(context, R.anim.scale_in_gentle)
+            scaleIn.startOffset = 450
             card.startAnimation(scaleIn)
         }
 
-        // Animate RecyclerViews
+        // Animate RecyclerViews with gentle slide up
         binding.rvTodayEntries?.let { rv ->
-            val slideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_right)
-            slideIn.startOffset = 400
-            rv.startAnimation(slideIn)
+            val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up_gentle)
+            slideUp.startOffset = 600
+            rv.startAnimation(slideUp)
         }
 
         binding.rvGoals?.let { rv ->
-            val slideIn = AnimationUtils.loadAnimation(context, R.anim.slide_in_from_right)
-            slideIn.startOffset = 500
-            rv.startAnimation(slideIn)
+            val slideUp = AnimationUtils.loadAnimation(context, R.anim.slide_up_gentle)
+            slideUp.startOffset = 750
+            rv.startAnimation(slideUp)
         }
     }
 

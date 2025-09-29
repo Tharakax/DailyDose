@@ -4,15 +4,17 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginBottom="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="2dp">
+    android:layout_marginBottom="12dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="1dp"
+    app:cardBackgroundColor="@color/card_background"
+    app:strokeWidth="0dp">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <!-- Goal Header -->
         <LinearLayout
@@ -24,8 +26,8 @@
                 android:id="@+id/tv_icon"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="12dp"
-                android:textSize="20sp"
+                android:layout_marginEnd="16dp"
+                android:textSize="24sp"
                 tools:text="⚖️" />
 
             <LinearLayout
@@ -38,17 +40,18 @@
                     android:id="@+id/tv_goal_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
+                    android:textSize="17sp"
                     android:textStyle="bold"
                     android:textColor="@color/text_primary"
+                    android:fontFamily="sans-serif-medium"
                     tools:text="Weight Goal" />
 
                 <TextView
                     android:id="@+id/tv_goal_target"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:textSize="14sp"
+                    android:layout_marginTop="6dp"
+                    android:textSize="15sp"
                     android:textColor="@color/text_secondary"
                     tools:text="Target: 70 kg" />
 
@@ -58,7 +61,7 @@
                 android:id="@+id/tv_progress_percentage"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 android:textColor="@color/primary_color"
                 tools:text="75%" />
@@ -70,11 +73,12 @@
             android:id="@+id/progress_bar"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
-            android:layout_height="8dp"
-            android:layout_marginTop="12dp"
+            android:layout_height="12dp"
+            android:layout_marginTop="16dp"
             android:max="100"
             android:progress="75"
             android:progressTint="@color/primary_color"
+            android:progressBackgroundTint="@color/soft_blue"
             tools:progress="75" />
 
         <!-- Progress Text -->
@@ -82,8 +86,8 @@
             android:id="@+id/tv_progress_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:textSize="12sp"
+            android:layout_marginTop="12dp"
+            android:textSize="13sp"
             android:textColor="@color/text_secondary"
             tools:text="Current: 72.5 kg" />
 

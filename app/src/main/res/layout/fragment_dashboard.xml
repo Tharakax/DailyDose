@@ -5,32 +5,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
+    android:background="@color/background_color"
     tools:context=".fragments.DashboardFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp"
-        android:paddingTop="32dp"
-        android:paddingBottom="24dp">
+        android:padding="20dp"
+        android:paddingTop="24dp"
+        android:paddingBottom="32dp">
 
-        <!-- Welcome Card with Gradient -->
+        <!-- Welcome Card with Soft Gradient -->
         <androidx.cardview.widget.CardView
             android:id="@+id/welcome_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="8dp"
-            app:cardBackgroundColor="@color/card_background">
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/card_background"
+            app:strokeWidth="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="24dp"
-                android:background="@drawable/gradient_dashboard">
+                android:padding="28dp"
+                android:background="@drawable/gradient_modern_blue">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -38,24 +40,39 @@
                     android:orientation="horizontal"
                     android:gravity="center_vertical">
 
-
                     <ImageView
-                        android:layout_width="48dp"
-                        android:layout_height="48dp"
+                        android:layout_width="56dp"
+                        android:layout_height="56dp"
                         android:src="@drawable/animated_heart"
                         android:background="@drawable/circle_background"
-                        android:padding="8dp" />
+                        android:padding="12dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="16dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/welcome_back"
+                            android:textSize="22sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="4dp"
+                            android:text="@string/track_your_health"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_secondary" />
+
+                    </LinearLayout>
 
                 </LinearLayout>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/track_your_health"
-                    android:textSize="16sp"
-                    android:textColor="@color/white"
-                    android:alpha="0.9" />
 
             </LinearLayout>
 
@@ -65,11 +82,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/today_summary"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/text_primary" />
+            android:textColor="@color/text_primary"
+            android:fontFamily="sans-serif-medium" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_today_entries"
@@ -83,11 +102,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="24dp"
             android:text="@string/quick_actions"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/text_primary" />
+            android:textColor="@color/text_primary"
+            android:fontFamily="sans-serif-medium" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -100,25 +121,26 @@
                 android:id="@+id/card_add_entry"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
+                android:layout_marginEnd="12dp"
                 android:layout_weight="1"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/card_background">
+                app:cardCornerRadius="24dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/card_background"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="20dp"
-                    android:background="@drawable/gradient_add_entry">
+                    android:padding="24dp"
+                    android:background="@drawable/gradient_add_entry_soft">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="➕"
-                        android:textSize="36sp" />
+                        android:textSize="32sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -128,7 +150,7 @@
                         android:textAlignment="center"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/text_primary" />
 
                 </LinearLayout>
 
@@ -139,25 +161,26 @@
                 android:id="@+id/card_bmi_calculator"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
+                android:layout_marginStart="12dp"
                 android:layout_weight="1"
-                app:cardCornerRadius="16dp"
-                app:cardElevation="6dp"
-                app:cardBackgroundColor="@color/card_background">
+                app:cardCornerRadius="24dp"
+                app:cardElevation="2dp"
+                app:cardBackgroundColor="@color/card_background"
+                app:strokeWidth="0dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center"
                     android:orientation="vertical"
-                    android:padding="20dp"
-                    android:background="@drawable/gradient_settings">
+                    android:padding="24dp"
+                    android:background="@drawable/gradient_calculator_soft">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="📊"
-                        android:textSize="36sp" />
+                        android:textSize="32sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -167,7 +190,7 @@
                         android:textAlignment="center"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:textColor="@color/white" />
+                        android:textColor="@color/text_primary" />
 
                 </LinearLayout>
 
@@ -180,30 +203,32 @@
             android:id="@+id/card_bmi"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
-            android:layout_marginBottom="16dp"
-            app:cardCornerRadius="20dp"
-            app:cardElevation="8dp"
-            app:cardBackgroundColor="@color/card_background">
+            android:layout_marginTop="28dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="28dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/card_background"
+            app:strokeWidth="0dp">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="24dp"
-                android:background="@drawable/gradient_todo">
+                android:padding="28dp"
+                android:background="@drawable/gradient_bmi_soft">
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="📊"
-                        android:textSize="32sp"
-                        android:layout_marginEnd="16dp" />
+                        android:textSize="36sp"
+                        android:layout_marginEnd="20dp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -215,18 +240,18 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/bmi_calculator"
-                            android:textSize="20sp"
+                            android:textSize="22sp"
                             android:textStyle="bold"
-                            android:textColor="@color/white" />
+                            android:textColor="@color/text_primary" />
 
                         <TextView
                             android:id="@+id/tv_bmi_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:textSize="32sp"
+                            android:textSize="36sp"
                             android:textStyle="bold"
-                            android:textColor="@color/white"
+                            android:textColor="@color/text_primary"
                             tools:text="22.5" />
 
                         <TextView
@@ -235,8 +260,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:textSize="16sp"
-                            android:textColor="@color/white"
-                            android:alpha="0.9"
+                            android:textColor="@color/text_secondary"
                             tools:text="Normal Weight" />
 
                     </LinearLayout>
@@ -247,15 +271,14 @@
                     android:id="@+id/tv_bmi_advice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="12dp"
-                    android:textSize="14sp"
-                    android:textColor="@color/white"
-                    android:alpha="0.8"
+                    android:layout_marginTop="16dp"
+                    android:textSize="15sp"
+                    android:textColor="@color/text_secondary"
                     android:maxLines="3"
                     android:ellipsize="end"
                     tools:text="Great! You're in a healthy weight range." />
 
-                </LinearLayout>
+            </LinearLayout>
 
         </androidx.cardview.widget.CardView>
 
@@ -263,11 +286,13 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="12dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp"
             android:text="@string/your_goals"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold"
-            android:textColor="@color/text_primary" />
+            android:textColor="@color/text_primary"
+            android:fontFamily="sans-serif-medium" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_goals"

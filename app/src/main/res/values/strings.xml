@@ -7,6 +7,8 @@
     <string name="add_entry">Add Entry</string>
     <string name="history">History</string>
     <string name="todo_list">Todo List</string>
+    <string name="analytics">Analytics</string>
+    <string name="meditation">Meditation</string>
     <string name="settings">Settings</string>
     
     <!-- Dashboard -->
@@ -119,4 +121,8 @@
     <string name="error_occurred">An error occurred</string>
     <string name="try_again">Try again</string>
     <string name="feature_coming_soon">This feature is coming soon!</string>
+    
+    <!-- Dialog -->
+    <string name="close">Close</string>
+    <string name="schedule">Schedule</string>
 </resources>
