@@ -96,7 +96,7 @@
             android:orientation="horizontal"
             android:weightSum="3">
 
-            <!-- Add Entry Button -->
+            <!-- Add Habit Button -->
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_add_entry"
                 android:layout_width="0dp"
@@ -114,23 +114,23 @@
                     android:gravity="center"
                     android:orientation="vertical"
                     android:padding="16dp"
-                    android:background="@drawable/gradient_add_entry_soft">
+                    android:background="@drawable/gradient_modern_green">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="➕"
+                        android:text="⭐"
                         android:textSize="32sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
-                        android:text="@string/add_entry"
+                        android:text="Add Habit"
                         android:textAlignment="center"
                         android:textSize="13sp"
                         android:textStyle="bold"
-                        android:textColor="@color/text_primary" />
+                        android:textColor="@android:color/white" />
 
                 </LinearLayout>
 
@@ -219,13 +219,13 @@
 
         </LinearLayout>
 
-        <!-- Today's Summary -->
+        <!-- Today's Habits -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
             android:layout_marginTop="24dp"
-            android:text="@string/today_summary"
+            android:text="⭐ Today's Habits"
             android:textSize="24sp"
             android:textStyle="bold"
             android:textColor="@color/text_primary"
@@ -237,6 +237,7 @@
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             android:nestedScrollingEnabled="false"
+            android:minHeight="200dp"
             tools:listitem="@layout/item_health_entry" />
 
         <!-- BMI Card -->

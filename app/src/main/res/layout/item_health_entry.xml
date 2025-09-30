@@ -67,8 +67,9 @@
         <!-- Notes -->
         <TextView
             android:id="@+id/tv_notes"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:maxLines="2"
             android:ellipsize="end"
@@ -76,6 +77,19 @@
             android:textColor="@color/text_secondary"
             android:visibility="gone"
             tools:text="Feeling good today"
+            tools:visibility="visible" />
+
+        <!-- 3-dots menu for habits -->
+        <ImageButton
+            android:id="@+id/btn_habit_menu"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="8dp"
+            android:background="?android:attr/selectableItemBackgroundBorderless"
+            android:src="@drawable/ic_more_vert"
+            android:contentDescription="More options"
+            android:visibility="gone"
             tools:visibility="visible" />
 
     </LinearLayout>

@@ -15,6 +15,8 @@
     import com.example.dailydose.databinding.FragmentDashboardBinding
 import com.example.dailydose.model.HealthEntry
 import com.example.dailydose.model.HealthType
+import com.example.dailydose.model.HabitEntry
+import com.example.dailydose.model.HabitCategory
 import com.example.dailydose.utils.BmiCalculator
 import com.example.dailydose.viewmodel.HealthViewModel
 import android.widget.Toast
@@ -67,13 +69,25 @@ import java.util.*
 
     private fun setupRecyclerViews() {
         // Today's entries RecyclerView
-        todayEntriesAdapter = HealthEntryAdapter { entry ->
-            // Handle entry click if needed
-        }
+        todayEntriesAdapter = HealthEntryAdapter(
+            onItemClick = { entry ->
+                // Handle entry click if needed
+            },
+            onEditHabit = { entry ->
+                showEditHabitDialog(entry)
+            },
+            onDeleteHabit = { entry ->
+                showDeleteHabitDialog(entry)
+            }
+        )
         binding.rvTodayEntries?.apply {
             layoutManager = LinearLayoutManager(requireContext())
             adapter = todayEntriesAdapter
+            visibility = View.VISIBLE
+            setHasFixedSize(false)
         }
+        
+        // Note: Test habit creation removed - now showing real habits only
 
         // Goals RecyclerView
         goalsAdapter = GoalAdapter { goal ->
@@ -86,10 +100,10 @@ import java.util.*
     }
 
     private fun setupClickListeners() {
-        // Add Entry button with animation
+        // Add Habit button with animation
         binding.cardAddEntry?.setOnClickListener { view ->
             animateCardClick(view)
-            showAddEntryDialog()
+            showAddHabitDialog()
         }
 
         // Meditation button click listener
@@ -115,7 +129,7 @@ import java.util.*
             try {
                 val heartRateCard = binding.root.findViewById<View>(R.id.card_add_heart_rate)
                 heartRateCard?.setOnClickListener {
-                    navigateToAddEntry(HealthType.HEART_RATE)
+                    showAddHabitDialog()
                 }
             } catch (e: Exception) {
                 // Card might not exist in portrait layout
@@ -124,16 +138,13 @@ import java.util.*
             try {
                 val stepsCard = binding.root.findViewById<View>(R.id.card_add_steps)
                 stepsCard?.setOnClickListener {
-                    navigateToAddEntry(HealthType.STEPS)
+                    showAddHabitDialog()
                 }
             } catch (e: Exception) {
                 // Card might not exist in portrait layout
             }
         }
 
-        private fun navigateToAddEntry(healthType: HealthType) {
-            showAddEntryDialog(healthType)
-        }
 
         private fun navigateToMeditation() {
             try {
@@ -145,106 +156,174 @@ import java.util.*
             }
         }
 
-        private fun showAddEntryDialog(preSelectedType: HealthType? = null) {
-            val dialogBinding = DialogAddEntryBinding.inflate(layoutInflater)
+        private fun showAddHabitDialog() {
+            val dialogView = layoutInflater.inflate(R.layout.dialog_add_habit, null)
             val dialog = AlertDialog.Builder(requireContext())
-                .setView(dialogBinding.root)
+                .setView(dialogView)
+                .setTitle("Add New Habit")
                 .create()
 
-            var selectedHealthType: HealthType? = preSelectedType
+            val etTitle = dialogView.findViewById<android.widget.EditText>(R.id.etHabitTitle)
+            val etDescription = dialogView.findViewById<android.widget.EditText>(R.id.etHabitDescription)
+            val spinnerCategory = dialogView.findViewById<android.widget.Spinner>(R.id.spinnerCategory)
+            val btnSave = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSave)
+            val btnCancel = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel)
 
-            // Setup health type dropdown
-            val healthTypes = HealthType.values().toList()
-            val healthTypeNames = healthTypes.map { it.displayName }
-            
-            // Set initial selection if pre-selected
-            preSelectedType?.let { 
-                dialogBinding.etHealthType.setText(it.displayName)
-                updateValueHint(dialogBinding, it)
-            }
-
-            // Health type dropdown click listener
-            dialogBinding.etHealthType.setOnClickListener {
-                showHealthTypeSelectionDialog(healthTypes) { selectedType ->
-                    selectedHealthType = selectedType
-                    dialogBinding.etHealthType.setText(selectedType.displayName)
-                    updateValueHint(dialogBinding, selectedType)
-                }
-            }
+            // Setup category spinner
+            val categories = HabitCategory.values().map { it.displayName }
+            val adapter = android.widget.ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories)
+            adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+            spinnerCategory.adapter = adapter
 
             // Save button
-            dialogBinding.btnSave.setOnClickListener {
-                val title = dialogBinding.etTitle.text.toString().trim()
-                val valueText = dialogBinding.etValue.text.toString().trim()
-                val description = dialogBinding.etDescription.text.toString().trim()
+            btnSave.setOnClickListener {
+                val title = etTitle.text.toString().trim()
+                val description = etDescription.text.toString().trim()
+                val selectedCategory = HabitCategory.values()[spinnerCategory.selectedItemPosition]
 
                 if (title.isEmpty()) {
-                    Toast.makeText(context, "Please enter a title", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(context, "Please enter a habit title", Toast.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
-                if (selectedHealthType == null) {
-                    Toast.makeText(context, "Please select a health type", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-
-                if (valueText.isEmpty()) {
-                    Toast.makeText(context, "Please enter a value", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-
-                val value = try {
-                    valueText.toDouble()
-                } catch (e: NumberFormatException) {
-                    Toast.makeText(context, "Please enter a valid number", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-
-                val entry = HealthEntry(
+                val habit = HabitEntry(
                     id = UUID.randomUUID().toString(),
-                    type = selectedHealthType!!,
-                    value = value,
-                    unit = selectedHealthType!!.unit,
+                    title = title,
+                    description = description,
+                    category = selectedCategory.displayName,
                     date = Date(),
                     timestamp = System.currentTimeMillis(),
+                    isCompleted = true,
                     notes = if (description.isNotEmpty()) "$title - $description" else title
                 )
 
-                healthRepository.saveHealthEntry(entry)
-                Toast.makeText(context, "Entry saved successfully", Toast.LENGTH_SHORT).show()
+                // Save as HealthEntry for compatibility with existing system
+                val healthEntry = HealthEntry(
+                    id = habit.id,
+                    type = HealthType.WATER, // Use WATER type as placeholder for habits
+                    value = 1.0, // Each habit counts as 1
+                    unit = "habit",
+                    date = habit.date,
+                    timestamp = habit.timestamp,
+                    notes = "HABIT: ${habit.title} - ${habit.description} (${habit.category})"
+                )
+
+                healthRepository.saveHealthEntry(healthEntry)
+                Toast.makeText(context, "⭐ Habit added successfully!", Toast.LENGTH_SHORT).show()
 
                 dialog.dismiss()
                 loadData() // Refresh dashboard data
             }
 
             // Cancel button
-            dialogBinding.btnCancel.setOnClickListener {
+            btnCancel.setOnClickListener {
                 dialog.dismiss()
             }
 
             dialog.show()
         }
 
-        private fun updateValueHint(binding: DialogAddEntryBinding, type: HealthType) {
-            binding.tilValue.hint = "Enter ${type.displayName} (${type.unit})"
+    private fun showEditHabitDialog(entry: HealthEntry) {
+        // Extract habit information from notes
+        val habitInfo = entry.notes.substringAfter("HABIT: ").trim()
+        val habitTitle = habitInfo.substringBefore(" - ").trim()
+        val habitDescription = if (habitInfo.contains(" - ")) {
+            habitInfo.substringAfter(" - ").substringBefore(" (").trim()
+        } else {
+            ""
+        }
+        val habitCategory = if (habitInfo.contains(" (")) {
+            habitInfo.substringAfter(" (").substringBefore(")").trim()
+        } else {
+            "General"
         }
 
-        private fun showHealthTypeSelectionDialog(healthTypes: List<HealthType>, onTypeSelected: (HealthType) -> Unit) {
-            val typeNames = healthTypes.map { it.displayName }.toTypedArray()
-            
-            AlertDialog.Builder(requireContext())
-                .setTitle("Select Health Type")
-                .setItems(typeNames) { _, which ->
-                    val selectedType = healthTypes[which]
-                    onTypeSelected(selectedType)
-                }
-                .show()
+        val dialogView = layoutInflater.inflate(R.layout.dialog_add_habit, null)
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .setTitle("Edit Habit")
+            .create()
+
+        val etTitle = dialogView.findViewById<android.widget.EditText>(R.id.etHabitTitle)
+        val etDescription = dialogView.findViewById<android.widget.EditText>(R.id.etHabitDescription)
+        val spinnerCategory = dialogView.findViewById<android.widget.Spinner>(R.id.spinnerCategory)
+        val btnSave = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSave)
+        val btnCancel = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel)
+
+        // Pre-fill with existing data
+        etTitle.setText(habitTitle)
+        etDescription.setText(habitDescription)
+
+        // Setup category spinner
+        val categories = HabitCategory.values().map { it.displayName }
+        val adapter = android.widget.ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, categories)
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        spinnerCategory.adapter = adapter
+
+        // Set selected category
+        val categoryIndex = categories.indexOf(habitCategory)
+        if (categoryIndex >= 0) {
+            spinnerCategory.setSelection(categoryIndex)
         }
+
+        // Save button
+        btnSave.setOnClickListener {
+            val title = etTitle.text.toString().trim()
+            val description = etDescription.text.toString().trim()
+            val selectedCategory = HabitCategory.values()[spinnerCategory.selectedItemPosition]
+
+            if (title.isEmpty()) {
+                Toast.makeText(context, "Please enter a habit title", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            // Update the existing entry
+            val updatedEntry = entry.copy(
+                notes = "HABIT: $title - $description (${selectedCategory.displayName})"
+            )
+
+            healthRepository.updateHealthEntry(updatedEntry)
+            Toast.makeText(context, "⭐ Habit updated successfully!", Toast.LENGTH_SHORT).show()
+
+            dialog.dismiss()
+            loadData() // Refresh dashboard data
+        }
+
+        // Cancel button
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun showDeleteHabitDialog(entry: HealthEntry) {
+        AlertDialog.Builder(requireContext())
+            .setTitle("Delete Habit")
+            .setMessage("Are you sure you want to delete this habit? This action cannot be undone.")
+            .setPositiveButton("Delete") { _, _ ->
+                healthRepository.deleteHealthEntry(entry.id)
+                Toast.makeText(context, "🗑️ Habit deleted successfully!", Toast.LENGTH_SHORT).show()
+                loadData() // Refresh dashboard data
+            }
+            .setNegativeButton("Cancel", null)
+            .show()
+    }
 
     private fun loadData() {
-        // Load today's entries
-        val todayEntries = healthRepository.getTodayEntries()
-        todayEntriesAdapter.updateEntries(todayEntries)
+        // Clear any test habits first
+        clearTestHabits()
+        
+        // Load today's entries and filter for habits only
+        val allTodayEntries = healthRepository.getTodayEntries()
+        val habitEntries = allTodayEntries.filter { entry ->
+            entry.notes.startsWith("HABIT:") && !entry.notes.contains("Test Habit")
+        }
+        
+        // Load habit entries for display
+        
+        // Display only real habit entries in Today's Summary
+        todayEntriesAdapter.updateEntries(habitEntries)
 
         // Load active goals
         val activeGoals = healthRepository.getActiveGoals()
@@ -252,6 +331,25 @@ import java.util.*
         
         // Calculate and display BMI
         updateBMIDisplay()
+    }
+    
+    private fun clearTestHabits() {
+        // Get all entries and remove any test habits
+        val allEntries = healthRepository.getAllHealthEntries()
+        val realEntries = allEntries.filter { entry ->
+            !entry.notes.contains("Test Habit") && !entry.id.startsWith("test-habit-")
+        }
+        
+        // If we found test habits, clear them
+        if (allEntries.size != realEntries.size) {
+            println("Dashboard: Clearing ${allEntries.size - realEntries.size} test habits")
+            
+            // Clear all entries and save only real ones
+            val sharedPrefs = requireContext().getSharedPreferences("health_data", android.content.Context.MODE_PRIVATE)
+            val gson = com.google.gson.Gson()
+            val json = gson.toJson(realEntries)
+            sharedPrefs.edit().putString("health_entries", json).apply()
+        }
     }
     
     private fun updateBMIDisplay() {

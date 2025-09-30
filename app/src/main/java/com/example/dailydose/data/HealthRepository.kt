@@ -105,12 +105,22 @@ class HealthRepository(private val context: Context) {
 
     // Statistics
     fun getTodayEntries(): List<HealthEntry> {
-        val today = Date()
-        val startOfDay = Date(today.time - (today.time % (24 * 60 * 60 * 1000)))
-        val endOfDay = Date(startOfDay.time + (24 * 60 * 60 * 1000))
+        val calendar = java.util.Calendar.getInstance()
+        val today = calendar.time
         
-        return getAllHealthEntries().filter { 
-            it.date >= startOfDay && it.date < endOfDay 
+        // Set to start of today
+        calendar.set(java.util.Calendar.HOUR_OF_DAY, 0)
+        calendar.set(java.util.Calendar.MINUTE, 0)
+        calendar.set(java.util.Calendar.SECOND, 0)
+        calendar.set(java.util.Calendar.MILLISECOND, 0)
+        val startOfDay = calendar.time
+        
+        // Set to end of today
+        calendar.add(java.util.Calendar.DAY_OF_MONTH, 1)
+        val endOfDay = calendar.time
+        
+        return getAllHealthEntries().filter { entry ->
+            entry.date >= startOfDay && entry.date < endOfDay
         }
     }
 

@@ -1,0 +1,5 @@
+# Meditation Music Placeholder
+# In a real implementation, you would place an actual MP3 file here
+# For now, this serves as a placeholder for the meditation background music
+# The app will handle the case where the music file is not found gracefully
+
