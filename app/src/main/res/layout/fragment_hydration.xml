@@ -297,17 +297,17 @@
                 android:elevation="4dp" />
 
             <Button
+                android:id="@+id/btnSetReminder"
                 android:layout_width="0dp"
                 android:layout_height="56dp"
                 android:layout_weight="1"
                 android:layout_marginStart="8dp"
-                android:text="💧 Add Water"
+                android:text="⏰ Reminder"
                 android:textSize="16sp"
                 android:textStyle="bold"
                 android:background="@drawable/gradient_modern_blue"
                 android:textColor="@android:color/white"
-                android:elevation="4dp"
-                android:onClick="onWaterBubbleClick" />
+                android:elevation="4dp" />
 
         </LinearLayout>
 

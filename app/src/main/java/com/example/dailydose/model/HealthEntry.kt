@@ -22,6 +22,7 @@ enum class HealthType(val displayName: String, val unit: String, val icon: Strin
     SLEEP("Sleep", "hours", "😴"),
     STEPS("Steps", "count", "👟"),
     WATER("Water Intake", "L", "💧"),
-    EXERCISE("Exercise", "minutes", "🏃")
+    EXERCISE("Exercise", "minutes", "🏃"),
+    HABIT("Habit", "completed", "⭐")
 }
 

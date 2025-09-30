@@ -42,4 +42,10 @@
         android:label="@string/meditation"
         tools:layout="@layout/fragment_meditation" />
 
+    <fragment
+        android:id="@+id/historyFragment"
+        android:name="com.example.dailydose.fragments.HistoryFragment"
+        android:label="@string/history"
+        tools:layout="@layout/fragment_history" />
+
 </navigation>

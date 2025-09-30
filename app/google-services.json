@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "659479130757",
+    "project_id": "dailydoseproject-d6643",
+    "storage_bucket": "dailydoseproject-d6643.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:659479130757:android:be0100d4666ab50c29afec",
+        "android_client_info": {
+          "package_name": "com.example.dailydose"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDrOyui-6Pl0B4TOmZnAQhXFYyHmAdUAGo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -30,6 +30,10 @@
             android:name=".MainActivity"
             android:exported="false"
             android:theme="@style/Theme.DailyDose" />
+        
+        <receiver
+            android:name=".receivers.WaterReminderReceiver"
+            android:exported="false" />
     </application>
 
 </manifest>

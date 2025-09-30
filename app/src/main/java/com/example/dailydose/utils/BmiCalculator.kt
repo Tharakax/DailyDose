@@ -8,7 +8,7 @@ object BmiCalculator {
     
     fun calculateBMI(weight: Double, height: Double): Double {
         if (height <= 0) return 0.0
-        return weight / (height / 100).pow(2)
+        return weight / height.pow(2)
     }
     
     fun getBMICategory(bmi: Double): BMICategory {

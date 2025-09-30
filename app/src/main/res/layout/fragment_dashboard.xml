@@ -16,23 +16,24 @@
         android:paddingTop="24dp"
         android:paddingBottom="32dp">
 
-        <!-- Welcome Card with Soft Gradient -->
-        <androidx.cardview.widget.CardView
+        <!-- Welcome Card with Modern Design -->
+        <com.google.android.material.card.MaterialCardView
             android:id="@+id/welcome_section"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="24dp"
             app:cardCornerRadius="28dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/card_background"
-            app:strokeWidth="0dp">
+            app:cardElevation="8dp"
+            app:strokeColor="@color/card_stroke"
+            app:strokeWidth="1dp"
+            app:cardBackgroundColor="@color/surface_container">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="28dp"
-                android:background="@drawable/gradient_modern_blue">
+                android:background="@drawable/gradient_welcome_modern">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -41,11 +42,308 @@
                     android:gravity="center_vertical">
 
                     <ImageView
-                        android:layout_width="56dp"
-                        android:layout_height="56dp"
-                        android:src="@drawable/animated_heart"
-                        android:background="@drawable/circle_background"
-                        android:padding="12dp" />
+                        android:layout_width="64dp"
+                        android:layout_height="64dp"
+                        android:src="@drawable/ic_health_pulse"
+                        android:background="@drawable/circle_gradient_accent"
+                        android:padding="16dp"
+                        android:elevation="4dp" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:layout_marginStart="20dp">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/welcome_back"
+                            android:textSize="24sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary"
+                            android:fontFamily="sans-serif-medium" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="6dp"
+                            android:text="@string/track_your_health"
+                            android:textSize="16sp"
+                            android:textColor="@color/text_secondary"
+                            android:fontFamily="sans-serif" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- Progress indicator -->
+                <com.google.android.material.progressindicator.LinearProgressIndicator
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginTop="20dp"
+                    android:progress="65"
+                    app:trackColor="@color/progress_track"
+                    app:trackCornerRadius="2dp"
+                    app:indicatorColor="@color/accent_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="65% of daily goals completed"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:fontFamily="sans-serif" />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- Quick Actions Section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="8dp"
+            android:text="@string/quick_actions"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:fontFamily="sans-serif-medium" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_quick_actions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:nestedScrollingEnabled="false"
+            tools:listitem="@layout/item_quick_action" />
+
+        <!-- Today's Habits Section -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="8dp">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="⭐ Today's Habits"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:textColor="@color/text_primary"
+                android:fontFamily="sans-serif-medium" />
+
+            <TextView
+                android:id="@+id/tv_habits_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="0/5"
+                android:textSize="14sp"
+                android:textColor="@color/text_secondary"
+                android:background="@drawable/badge_background"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="4dp"
+                android:fontFamily="sans-serif" />
+
+        </LinearLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_today_entries"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="24dp"
+            android:nestedScrollingEnabled="false"
+            android:minHeight="200dp"
+            tools:listitem="@layout/item_habit_modern" />
+
+        <!-- Health Stats Overview -->
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp"
+            app:cardBackgroundColor="@color/surface_container_low">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="📊 Health Overview"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginBottom="20dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:weightSum="3">
+
+                    <!-- Steps Stat -->
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_steps"
+                            app:tint="@color/accent_primary" />
+
+                        <TextView
+                            android:id="@+id/tv_steps"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="8,234"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Steps"
+                            android:textSize="12sp"
+                            android:textColor="@color/text_secondary" />
+
+                    </LinearLayout>
+
+                    <!-- Water Stat -->
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="40dp"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_water"
+                            android:tint="@color/accent_secondary" />
+
+                        <TextView
+                            android:id="@+id/tv_water"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="1.8L"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Water"
+                            android:textSize="12sp"
+                            android:textColor="@color/text_secondary" />
+
+                    </LinearLayout>
+
+                    <!-- Sleep Stat -->
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="40dp"
+                        android:background="@color/divider" />
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:gravity="center"
+                        android:padding="12dp">
+
+                        <ImageView
+                            android:layout_width="32dp"
+                            android:layout_height="32dp"
+                            android:src="@drawable/ic_sleep"
+                            android:tint="@color/accent_tertiary" />
+
+                        <TextView
+                            android:id="@+id/tv_sleep"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:text="7.2h"
+                            android:textSize="16sp"
+                            android:textStyle="bold"
+                            android:textColor="@color/text_primary" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Sleep"
+                            android:textSize="12sp"
+                            android:textColor="@color/text_secondary" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <!-- BMI Card with Modern Design -->
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_bmi"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="6dp"
+            app:cardBackgroundColor="@color/surface_container">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="24dp"
+                android:background="@drawable/gradient_bmi_modern">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical">
+
+                    <ImageView
+                        android:layout_width="48dp"
+                        android:layout_height="48dp"
+                        android:src="@drawable/ic_bmi"
+                        android:background="@drawable/circle_accent_primary"
+                        android:padding="12dp"
+                        android:elevation="4dp" />
 
                     <LinearLayout
                         android:layout_width="0dp"
@@ -57,243 +355,20 @@
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:text="@string/welcome_back"
-                            android:textSize="22sp"
-                            android:textStyle="bold"
-                            android:textColor="@color/text_primary" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="4dp"
-                            android:text="@string/track_your_health"
-                            android:textSize="16sp"
-                            android:textColor="@color/text_secondary" />
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-            </LinearLayout>
-
-        </androidx.cardview.widget.CardView>
-
-        <!-- Quick Actions -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/quick_actions"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:fontFamily="sans-serif-medium" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:weightSum="3">
-
-            <!-- Add Habit Button -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_add_entry"
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_marginEnd="6dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="3dp"
-                app:cardBackgroundColor="@color/card_background"
-                app:strokeWidth="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:background="@drawable/gradient_modern_green">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="⭐"
-                        android:textSize="32sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Add Habit"
-                        android:textAlignment="center"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- Meditation Button -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_meditation"
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="3dp"
-                android:layout_marginEnd="3dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="3dp"
-                app:cardBackgroundColor="@color/card_background"
-                app:strokeWidth="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:background="@drawable/gradient_modern_pink">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="🧘"
-                        android:textSize="32sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="Meditation"
-                        android:textAlignment="center"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="@android:color/white" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-            <!-- BMI Calculator Button -->
-            <androidx.cardview.widget.CardView
-                android:id="@+id/card_bmi_calculator"
-                android:layout_width="0dp"
-                android:layout_height="120dp"
-                android:layout_marginStart="6dp"
-                android:layout_weight="1"
-                app:cardCornerRadius="20dp"
-                app:cardElevation="3dp"
-                app:cardBackgroundColor="@color/card_background"
-                app:strokeWidth="0dp">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:gravity="center"
-                    android:orientation="vertical"
-                    android:padding="16dp"
-                    android:background="@drawable/gradient_calculator_soft">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📊"
-                        android:textSize="32sp" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:text="@string/bmi_calculator"
-                        android:textAlignment="center"
-                        android:textSize="13sp"
-                        android:textStyle="bold"
-                        android:textColor="@color/text_primary" />
-
-                </LinearLayout>
-
-            </androidx.cardview.widget.CardView>
-
-        </LinearLayout>
-
-        <!-- Today's Habits -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="24dp"
-            android:text="⭐ Today's Habits"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:fontFamily="sans-serif-medium" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_today_entries"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="24dp"
-            android:nestedScrollingEnabled="false"
-            android:minHeight="200dp"
-            tools:listitem="@layout/item_health_entry" />
-
-        <!-- BMI Card -->
-        <androidx.cardview.widget.CardView
-            android:id="@+id/card_bmi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="28dp"
-            android:layout_marginBottom="20dp"
-            app:cardCornerRadius="28dp"
-            app:cardElevation="4dp"
-            app:cardBackgroundColor="@color/card_background"
-            app:strokeWidth="0dp">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:padding="28dp"
-                android:background="@drawable/gradient_bmi_soft">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:gravity="center_vertical">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📊"
-                        android:textSize="36sp"
-                        android:layout_marginEnd="20dp" />
-
-                    <LinearLayout
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:orientation="vertical">
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
                             android:text="@string/bmi_calculator"
-                            android:textSize="22sp"
+                            android:textSize="18sp"
                             android:textStyle="bold"
-                            android:textColor="@color/text_primary" />
+                            android:textColor="@color/text_primary"
+                            android:fontFamily="sans-serif-medium" />
 
                         <TextView
                             android:id="@+id/tv_bmi_value"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp"
-                            android:textSize="36sp"
+                            android:layout_marginTop="6dp"
+                            android:textSize="32sp"
                             android:textStyle="bold"
-                            android:textColor="@color/text_primary"
+                            android:textColor="@color/accent_primary"
                             tools:text="22.5" />
 
                         <TextView
@@ -301,11 +376,22 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textColor="@color/text_secondary"
                             tools:text="Normal Weight" />
 
                     </LinearLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btn_bmi_calculate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Calculate"
+                        android:textSize="12sp"
+                        style="@style/Widget.Material3.Button.OutlinedButton"
+                        app:strokeColor="@color/accent_primary"
+                        app:strokeWidth="1dp"
+                        android:paddingHorizontal="16dp" />
 
                 </LinearLayout>
 
@@ -314,40 +400,17 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="16dp"
-                    android:textSize="15sp"
+                    android:textSize="14sp"
                     android:textColor="@color/text_secondary"
+                    android:lineSpacingExtra="4dp"
                     android:maxLines="3"
                     android:ellipsize="end"
-                    tools:text="Great! You're in a healthy weight range." />
+                    tools:text="Great! You're in a healthy weight range. Maintain your current lifestyle with balanced nutrition and regular exercise." />
 
             </LinearLayout>
 
-        </androidx.cardview.widget.CardView>
-
-        <!-- Goals Progress -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/your_goals"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            android:textColor="@color/text_primary"
-            android:fontFamily="sans-serif-medium" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_goals"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:nestedScrollingEnabled="false"
-            tools:listitem="@layout/item_goal" />
+        </com.google.android.material.card.MaterialCardView>
 
     </LinearLayout>
 
 </ScrollView>
-
-
-
-
-

@@ -2,19 +2,25 @@ package com.example.dailydose.fragments
 
 import android.animation.ObjectAnimator
 import android.animation.ValueAnimator
+import android.app.AlertDialog
+import android.content.pm.PackageManager
 import android.graphics.Color
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import com.example.dailydose.R
 import com.example.dailydose.databinding.FragmentHydrationBinding
 import com.example.dailydose.data.HealthRepository
 import com.example.dailydose.model.HealthEntry
 import com.example.dailydose.model.HealthType
+import com.example.dailydose.services.WaterReminderService
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.Calendar
@@ -25,11 +31,13 @@ class HydrationFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var healthRepository: HealthRepository
+    private lateinit var waterReminderService: WaterReminderService
     private var currentWaterLevel = 0
     private val maxWaterLevel = 10
     private var totalWaterIntake = 0.0
     private val waterPerPress = 0.2 // 200ml per press
     private var hasJustReset = false
+    private var selectedReminderInterval = 30 // Default to 30 minutes
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -45,6 +53,7 @@ class HydrationFragment : Fragment() {
 
         try {
             healthRepository = HealthRepository(requireContext())
+            waterReminderService = WaterReminderService(requireContext())
             setupWaterBubble()
             setupClickListeners()
             loadTodayWaterIntake()
@@ -73,6 +82,10 @@ class HydrationFragment : Fragment() {
 
         binding.btnResetWater.setOnClickListener {
             resetWaterIntake()
+        }
+
+        binding.btnSetReminder.setOnClickListener {
+            showReminderDialog()
         }
     }
 
@@ -345,6 +358,86 @@ class HydrationFragment : Fragment() {
             .setDuration(600)
             .setStartDelay(400)
             .start()
+    }
+
+    private fun showReminderDialog() {
+        // Check notification permission first
+        if (!hasNotificationPermission()) {
+            requestNotificationPermission()
+            return
+        }
+
+        val dialogView = LayoutInflater.from(requireContext()).inflate(R.layout.dialog_water_reminder, null)
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .setCancelable(true)
+            .create()
+
+        // Set up card click listeners
+        val cards = listOf(
+            dialogView.findViewById<androidx.cardview.widget.CardView>(R.id.card15min) to 15,
+            dialogView.findViewById<androidx.cardview.widget.CardView>(R.id.card30min) to 30,
+            dialogView.findViewById<androidx.cardview.widget.CardView>(R.id.card60min) to 60,
+            dialogView.findViewById<androidx.cardview.widget.CardView>(R.id.card120min) to 120
+        )
+
+        cards.forEach { (card, minutes) ->
+            card.setOnClickListener {
+                // Reset all card backgrounds
+                cards.forEach { (c, _) -> c.setCardBackgroundColor(ContextCompat.getColor(requireContext(), android.R.color.transparent)) }
+                
+                // Highlight selected card
+                card.setCardBackgroundColor(ContextCompat.getColor(requireContext(), R.color.light_blue))
+                selectedReminderInterval = minutes
+            }
+        }
+
+        // Set default selection (30 minutes)
+        dialogView.findViewById<androidx.cardview.widget.CardView>(R.id.card30min).setCardBackgroundColor(
+            ContextCompat.getColor(requireContext(), R.color.light_blue)
+        )
+
+        // Set up button listeners
+        dialogView.findViewById<View>(R.id.btnCancel).setOnClickListener {
+            dialog.dismiss()
+        }
+
+        dialogView.findViewById<View>(R.id.btnSetReminder).setOnClickListener {
+            waterReminderService.scheduleWaterReminder(selectedReminderInterval)
+            val message = when (selectedReminderInterval) {
+                15 -> "⚡ Quick reminders set every 15 minutes!"
+                30 -> "⭐ Recommended reminders set every 30 minutes!"
+                60 -> "🐌 Relaxed reminders set every hour!"
+                120 -> "😴 Gentle reminders set every 2 hours!"
+                else -> "Reminders set every $selectedReminderInterval minutes!"
+            }
+            Toast.makeText(context, message, Toast.LENGTH_LONG).show()
+            dialog.dismiss()
+        }
+
+        dialog.show()
+    }
+
+    private fun hasNotificationPermission(): Boolean {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            ContextCompat.checkSelfPermission(
+                requireContext(),
+                android.Manifest.permission.POST_NOTIFICATIONS
+            ) == PackageManager.PERMISSION_GRANTED
+        } else {
+            true // Permission not required for older versions
+        }
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            val activity = activity ?: return
+            ActivityCompat.requestPermissions(
+                activity,
+                arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),
+                1001
+            )
+        }
     }
 
     override fun onDestroyView() {

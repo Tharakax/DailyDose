@@ -2,63 +2,111 @@
 <resources>
     <!-- Base application theme. -->
     <style name="Base.Theme.DailyDose" parent="Theme.Material3.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/primary_color</item>
-        <item name="colorPrimaryVariant">@color/primary_dark</item>
+        <item name="colorPrimary">@color/modern_blue</item>
+        <item name="colorPrimaryVariant">@color/modern_blue_dark</item>
         <item name="colorOnPrimary">@color/white</item>
-        <item name="colorSecondary">@color/accent_color</item>
+        <item name="colorSecondary">@color/modern_green</item>
         <item name="colorOnSecondary">@color/white</item>
         <item name="android:colorBackground">@color/background_color</item>
         <item name="colorSurface">@color/surface_color</item>
         <item name="colorOnSurface">@color/text_primary</item>
         <item name="colorOnBackground">@color/text_primary</item>
-        <item name="android:statusBarColor">@color/primary_dark</item>
-        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:windowLightNavigationBar">true</item>
+
+        <!-- Material 3 specific -->
+        <item name="materialThemeOverlay">@style/ThemeOverlay.DailyDose</item>
     </style>
 
     <style name="Theme.DailyDose" parent="Base.Theme.DailyDose" />
-    
-    <!-- Modern Card Style -->
-    <style name="ModernCard" parent="Widget.MaterialComponents.CardView">
-        <item name="cardCornerRadius">16dp</item>
-        <item name="cardElevation">6dp</item>
-        <item name="cardBackgroundColor">@color/card_background</item>
+
+    <!-- Theme Overlay for Material 3 -->
+    <style name="ThemeOverlay.DailyDose" parent="">
+        <item name="colorSurfaceVariant">@color/surface_container</item>
+        <item name="colorOnSurfaceVariant">@color/text_secondary</item>
+        <item name="colorPrimaryContainer">@color/surface_container</item>
+        <item name="colorOnPrimaryContainer">@color/modern_blue</item>
     </style>
-    
+
+    <!-- Modern Card Style -->
+    <style name="ModernCard" parent="android:Widget">
+        <item name="android:background">@drawable/modern_card_background</item>
+        <item name="android:clipToOutline">true</item>
+    </style>
+
     <!-- Modern Button Style -->
-    <style name="ModernButton" parent="Widget.MaterialComponents.Button">
+    <style name="ModernButton" parent="Widget.AppCompat.Button">
         <item name="android:background">@drawable/modern_button</item>
         <item name="android:textColor">@color/white</item>
         <item name="android:textSize">16sp</item>
         <item name="android:textStyle">bold</item>
         <item name="android:padding">16dp</item>
     </style>
-    
+
+    <!-- Modern Filled Button -->
+    <style name="ModernButton.Filled" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/modern_button_filled</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <!-- Modern Outlined Button -->
+    <style name="ModernButton.Outlined" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/modern_button_outlined</item>
+        <item name="android:textColor">@color/modern_green</item>
+    </style>
+
     <!-- Modern Floating Action Button -->
-    <style name="ModernFAB" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="backgroundTint">@color/accent_color</item>
-        <item name="tint">@color/white</item>
-        <item name="elevation">8dp</item>
-        <item name="pressedTranslationZ">12dp</item>
+    <style name="ModernFAB" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/modern_fab</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:elevation">8dp</item>
     </style>
-    
-    <!-- Page-specific themes -->
-    <style name="DashboardTheme">
-        <item name="android:background">@color/dashboard_background</item>
+
+    <!-- Modern Alert Dialog -->
+    <style name="ModernAlertDialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/modern_green</item>
+        <item name="colorAccent">@color/modern_green</item>
+        <item name="android:windowBackground">@drawable/modern_dialog_background</item>
+        <item name="buttonBarPositiveButtonStyle">@style/ModernButton.Filled</item>
+        <item name="buttonBarNegativeButtonStyle">@style/ModernButton.Outlined</item>
     </style>
-    
-    <style name="AddEntryTheme">
-        <item name="android:background">@color/add_entry_background</item>
+
+    <style name="ModernAlertDialogText" parent="android:TextAppearance">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textSize">14sp</item>
     </style>
-    
-    <style name="HistoryTheme">
-        <item name="android:background">@color/history_background</item>
+
+    <style name="ModernAlertDialogTitle" parent="android:TextAppearance.Material.Title">
+        <item name="android:textColor">@color/text_primary</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textSize">18sp</item>
     </style>
-    
-    <style name="TodoTheme">
-        <item name="android:background">@color/todo_background</item>
+
+    <!-- Text Input Layout Style -->
+    <style name="ModernTextInputLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:background">@drawable/modern_text_input</item>
+        <item name="android:textColorHint">@color/text_secondary</item>
     </style>
-    
-    <style name="SettingsTheme">
-        <item name="android:background">@color/settings_background</item>
+
+    <!-- Progress Indicator Style -->
+    <style name="ModernProgressIndicator" parent="android:Widget">
+        <item name="android:progressDrawable">@drawable/modern_progress</item>
+    </style>
+
+    <!-- Chip Styles -->
+    <style name="ModernChip" parent="android:Widget">
+        <item name="android:background">@drawable/modern_chip</item>
+        <item name="android:textColor">@color/text_primary</item>
+    </style>
+
+    <!-- Bottom Navigation Style -->
+    <style name="ModernBottomNavigation" parent="Widget.Design.BottomNavigationView">
+        <item name="itemBackground">@color/surface_color</item>
+        <item name="itemTextColor">@color/bottom_navigation_color_state</item>
+        <item name="itemIconTint">@color/bottom_navigation_color_state</item>
+        <item name="android:elevation">8dp</item>
     </style>
 </resources>
