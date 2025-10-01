@@ -18,10 +18,10 @@
         tools:layout="@layout/fragment_hydration" />
 
     <fragment
-        android:id="@+id/todoListFragment"
-        android:name="com.example.dailydose.fragments.TodoListFragment"
-        android:label="@string/todo_list"
-        tools:layout="@layout/fragment_todo_list" />
+        android:id="@+id/moodTrackingFragment"
+        android:name="com.example.dailydose.fragments.MoodTrackingFragment"
+        android:label="@string/mood_tracking"
+        tools:layout="@layout/fragment_mood_tracking" />
 
     <fragment
         android:id="@+id/analyticsFragment"

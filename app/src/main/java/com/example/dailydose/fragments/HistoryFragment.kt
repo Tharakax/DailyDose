@@ -47,8 +47,7 @@ class HistoryFragment : Fragment() {
     }
 
     private fun setupRepository() {
-        val context = context ?: return
-        healthRepository = HealthRepository(context)
+        healthRepository = HealthRepository(requireContext())
     }
 
     private fun setupRecyclerView() {

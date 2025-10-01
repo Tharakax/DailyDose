@@ -9,9 +9,9 @@
         android:icon="@drawable/ic_water"
         android:title="@string/hydration" />
     <item
-        android:id="@+id/todoListFragment"
-        android:icon="@drawable/ic_todo"
-        android:title="@string/todo_list" />
+        android:id="@+id/moodTrackingFragment"
+        android:icon="@drawable/ic_mood"
+        android:title="@string/mood_tracking" />
     <item
         android:id="@+id/analyticsFragment"
         android:icon="@drawable/ic_analytics"

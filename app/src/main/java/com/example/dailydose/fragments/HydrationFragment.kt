@@ -431,9 +431,8 @@ class HydrationFragment : Fragment() {
 
     private fun requestNotificationPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            val activity = activity ?: return
             ActivityCompat.requestPermissions(
-                activity,
+                requireActivity(),
                 arrayOf(android.Manifest.permission.POST_NOTIFICATIONS),
                 1001
             )
